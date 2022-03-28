@@ -3,10 +3,14 @@ import re
 import ply.lex as lex
 
 tokens = (
-    'FLOAT_DIGIT','BEGIN', 'END', 'PRINT', "OPEN_PAREN","CLOSE_PAREN","SEMI_COLON","SUM","MINUS","VARIABLE","COLON","EQUAL","CYCLE","INTEGER_TYPE","FLOAT_TYPE", "VAR", "COMMA"
+    'INT_DIGIT','FLOAT_DIGIT','BEGIN', 'END',
+    'PRINT', "OPEN_PAREN","CLOSE_PAREN","SEMI_COLON",
+    "SUM","MINUS","VARIABLE","COLON","EQUAL","CYCLE",
+    "INTEGER_TYPE","FLOAT_TYPE", "VAR", "COMMA"
 
 )
 ident = r"[a-z]\w*"
+t_INT_DIGIT = r"[^\.]\d+[^\.]"
 t_FLOAT_DIGIT = r"\d+\.\d+"
 t_COMMA = r","
 t_VAR = r"var"
@@ -39,9 +43,13 @@ with open ("/home/valery/PycharmProjects/Compiler_PA_6_sem/program") as read_fil
 data = "".join(tmp.split())
 
 lexer.input(data)
-
+lst = []
 while True:
     token  = lexer.token()
     if not token:
         break
-    print(f"{token},        {type(token)}")
+    lst.append(str(token))
+    print(f"{str(token)}")
+
+# for i in lst:
+#     print(lst)

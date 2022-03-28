@@ -49,11 +49,6 @@ print_flag = findall(r"print", "".join(service_words_flag))
 float_word_flag = findall(r"float", "".join(service_words_flag))
 declare_variables_flag = findall(r"var", "".join(service_words_flag))
 
-
-
-
-
-
 if float_flag:
     dict_of_tokens['float'] = float_flag
 if int_flag:
@@ -100,6 +95,13 @@ for i in dict_of_tokens:
 
 print(f"len_program = {len(text_program)}, len_dict_tokens = {sum(summ)}")
 
-with open("table_of_symbols.json", "w") as json_file_write:
-    json.dump(dict_of_tokens, json_file_write, indent=2)
+# with open("table_of_symbols.json", "w") as json_file_write:
+#     json.dump(dict_of_tokens, json_file_write, indent=2)
+
+counter = 0
+for i in dict_of_tokens:
+    for j in dict_of_tokens[i]:
+        with open("file.txt", "a") as write_file:
+            write_file.write(f"{counter}, {i}, {j}\n")
+            counter += 1
 

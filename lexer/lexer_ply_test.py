@@ -50,6 +50,12 @@ while True:
         break
     lst.append(str(token))
     print(f"{str(token)}")
+lst_final = []
+for i in lst:
+    tmp = i.replace("LexToken(", "")
+    tmp_2 = tmp.replace(")", "")
+    lst_final.append(tmp_2.split(","))
 
-# for i in lst:
-#     print(lst)
+for i in lst_final:
+    i.pop(-2)
+    print(i)

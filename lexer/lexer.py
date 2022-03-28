@@ -1,12 +1,12 @@
 """
 declare_variables
 На выходе из лексера должен получиться поток токенов вида (int, 28) (binary_op, +) (int, 45)
-Еще должна быть таблица символов. Словарь, где ключ - тип токена, значение - список встречающихся в тексте программы лексем, удовлетворяющих шаблону данного токена.
+Еще должна быть таблица символов. Матрица, где строки вида: id, type, value ---> [01, variable, $a]
 """
 
 
 from re import findall
-
+import json
 
 
 with open ("/home/valery/PycharmProjects/Compiler_PA_6_sem/program") as read_file:
@@ -100,4 +100,6 @@ for i in dict_of_tokens:
 
 print(f"len_program = {len(text_program)}, len_dict_tokens = {sum(summ)}")
 
+with open("table_of_symbols.json", "w") as json_file_write:
+    json.dump(dict_of_tokens, json_file_write, indent=2)
 

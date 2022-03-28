@@ -7,7 +7,6 @@ text_program = "".join(tmp.split())
 print(text_program)
 dict_of_lexems: dict = {}
 print('Rock')
-
 int_template = r"[\+=\-:]\d+[\+=\-:;]|[\+=\-:]\d+;"
 float_template = r"[\+=\-:]\d+\.\d+[\+=\-:;]|[\+=\-:]\d+\.\d+"
 literals_template = r"[\.\+\-,:;=!]"

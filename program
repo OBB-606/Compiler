@@ -12,4 +12,4 @@ begin
         print($a)
     end
 
-end.
+end

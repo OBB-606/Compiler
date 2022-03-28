@@ -54,8 +54,11 @@ lst_final = []
 for i in lst:
     tmp = i.replace("LexToken(", "")
     tmp_2 = tmp.replace(")", "")
-    lst_final.append(tmp_2.split(","))
+    lst_final.append((tmp_2.replace("'", "")).split(","))
 
 for i in lst_final:
     i.pop(-2)
     print(i)
+with open("file_tockens.txt", "w") as write_file:
+    for i in lst_final:
+        write_file.writelines(f"{i}\n")

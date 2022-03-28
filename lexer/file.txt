@@ -31,8 +31,8 @@
 30, integer_word, integer
 31, begin, begin
 32, begin, begin
-33, end, begin
-34, end, begin
+33, end, end
+34, end, end
 35, cycle, while
 36, print, print
 37, float_word, float

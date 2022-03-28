@@ -50,7 +50,7 @@ colon_flag = findall(r":", "".join(literals_flag))
 
 integer_word_flag = findall(r"integer", "".join(service_words_flag))
 begin_flag = findall(r"begin", "".join(service_words_flag))
-end_flag = findall(r"end|end\.", "".join(service_words_flag))
+end_flag = findall(r"end", "".join(service_words_flag))
 cycle_flag = findall(r"while", "".join(service_words_flag))
 print_flag = findall(r"print", "".join(service_words_flag))
 float_word_flag = findall(r"float", "".join(service_words_flag))
@@ -85,7 +85,7 @@ if integer_word_flag:
 if begin_flag:
     dict_of_tokens['begin'] = begin_flag
 if end_flag:
-    dict_of_tokens['end'] = begin_flag
+    dict_of_tokens['end'] = end_flag
 if cycle_flag:
     dict_of_tokens['cycle'] = cycle_flag
 if print_flag:

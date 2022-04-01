@@ -6,18 +6,16 @@ tokens = (
     'INT_DIGIT','FLOAT_DIGIT','BEGIN', 'END',
     'PRINT', "OPEN_PAREN","CLOSE_PAREN","SEMI_COLON",
     "SUM","MINUS","VARIABLE","COLON","EQUAL","CYCLE",
-    "INTEGER_TYPE","FLOAT_TYPE", "VAR", "COMMA", "NEGATION", "POINT"
-)
+    "INTEGER_TYPE","FLOAT_TYPE", "VAR", "COMMA"
 
+)
 ident = r"[a-z]\w*"
-t_POINT = r"\."
-t_NEGATION = r"\!"
 t_INT_DIGIT = r"[^\.]\d+[^\.]"
 t_FLOAT_DIGIT = r"\d+\.\d+"
 t_COMMA = r","
 t_VAR = r"var"
 t_BEGIN = r"begin"
-t_END = r"end"
+t_END = r"end|end[\.]"
 t_PRINT = r'print'
 t_OPEN_PAREN = r"\("
 t_CLOSE_PAREN = r"\)"
@@ -38,6 +36,7 @@ def t_error(t):
 
 
 lexer = lex.lex(reflags=re.UNICODE | re.DOTALL)
+
 
 with open ("/home/valery/PycharmProjects/Compiler_PA_6_sem/program") as read_file:
     tmp = read_file.read()

@@ -1,12 +1,8 @@
 """
-declare_variables
-На выходе из лексера должен получиться поток токенов вида (int, 28) (binary_op, +) (int, 45)
-Еще должна быть таблица символов. Матрица, где строки вида: id, type, value ---> [01, variable, $a]
+поток токенов в таком же порядке в каком их value встречается в исходном тексте программы
 """
 
-
 from re import findall
-import json
 
 #for linux
 with open ("/home/valery/PycharmProjects/Compiler_PA_6_sem/program") as read_file:
@@ -21,7 +17,6 @@ with open ("/home/valery/PycharmProjects/Compiler_PA_6_sem/program") as read_fil
 text_program = "".join(tmp.split())
 print(text_program)
 dict_of_tokens: dict = {}
-print('Rock')
 int_template = r"[\+=\-:]\d+[\+=\-:;]|[\+=\-:]\d+;"
 float_template = r"[\+=\-:]\d+\.\d+[\+=\-:;]|[\+=\-:]\d+\.\d+"
 literals_template = r"[\(\)\.\+\-,:;=!]"
@@ -102,7 +97,7 @@ for i in dict_of_tokens:
     summ.append(len("".join(dict_of_tokens[i])))
     print(f"{i} --> {dict_of_tokens[i]} --> len = {len(dict_of_tokens[i])}")
 
-print(f"len_program = {len(text_program)}, len_dict_tokens = {sum(summ)}")
+# print(f"len_program = {len(text_program)}, len_dict_tokens = {sum(summ)}")
 
 # with open("table_of_symbols.json", "w") as json_file_write:
 #     json.dump(dict_of_tokens, json_file_write, indent=2)

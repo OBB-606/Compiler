@@ -2,6 +2,8 @@ import re
 
 import ply.lex as lex
 
+
+
 tokens = (
     'INT_DIGIT','FLOAT_DIGIT','BEGIN', 'END',
     'PRINT', "OPEN_PAREN","CLOSE_PAREN","SEMI_COLON",
@@ -38,7 +40,7 @@ def t_error(t):
 lexer = lex.lex(reflags=re.UNICODE | re.DOTALL)
 
 
-with open ("/home/valery/PycharmProjects/Compiler_PA_6_sem/program") as read_file:
+with open ("/home/mbluuka/Рабочий стол/Compiler/Compiler/program") as read_file:
     tmp = read_file.read()
 data = "".join(tmp.split())
 

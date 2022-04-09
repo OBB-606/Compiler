@@ -1,4 +1,7 @@
 """
+var$a,$b,$c:integer;$d:float;begin$a=28;$b=$a+45;$c=$b-14;$d=11.1345;while($a!=0.1)begin$a=$a-1;print($a)endend
+
+
 \d - числа ~ [0-9]
 \D - не числа ~ [^0-9]
 \w - буквы, числа.

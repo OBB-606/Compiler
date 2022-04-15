@@ -34,3 +34,31 @@ if flag:
     print("is valid")
 else:
     print("not valid")
+
+'''var : VAR variable COLON INTEGER_TYPE SEMICOLON body
+           | VAR variable COLON FLOAT_TYPE SEMICOLON body
+    body :
+            | body lines colons
+            | BEGIN lines colons END
+    colons : SEMI_COLON
+              | colons SEMI_COLON
+    lines : assign
+             | while
+             | PRINT args
+    assign : VARIABLE EQUAL expr
+    expr : fact
+            | expr SUM fact
+            | expr MINUS fact
+    fact : term
+    term : arg
+            | OPEN_PAREN expr CLOSE_PAREN
+    while : CYCLE OPEN_PAREN args CLOSE_PAREN BEGIN lines END
+    args :
+            | expr
+            | args COMMA expr
+    arg : variable
+           | FLOAT_DIGIT
+           | INT_DIGIT
+    variable : VARIABLE
+           | VARIABLE COMMA variable
+           |'''

@@ -18,7 +18,7 @@ tokens = (
     'INT_DIGIT','FLOAT_DIGIT','BEGIN', 'END',
     'PRINT', "OPEN_PAREN","CLOSE_PAREN","SEMI_COLON",
     "SUM","MINUS","VARIABLE","COLON","EQUAL","CYCLE",
-    "INTEGER_TYPE","FLOAT_TYPE", "VAR", "COMMA", "POINT",
+    "INTEGER_TYPE","FLOAT_TYPE", "VAR", "COMMA",
     "NEGATION"
 )
 # int_first = r"[=\+\-\*]\d+[=\+\-;\)\*]"
@@ -27,7 +27,6 @@ t_INT_DIGIT = r"\d+"
 t_FLOAT_DIGIT = r"\d+\.\d+"
 ident = r"[a-z]\w*"
 t_NEGATION = r"\!"
-t_POINT = r"\."
 t_COMMA = r","
 t_VAR = r"var"
 t_BEGIN = r"begin"
@@ -74,6 +73,5 @@ with open("file_tockens.txt", "w") as write_file:
     # write_file.write(f"Type_token, value_token, position_token, id_token\n")
     # for i in range(0, len(lst_final)-2, 3):
     #     write_file.write(f"{lst_final[i]}\t\t{lst_final[i+1]}\t\t{lst_final[i+2]}\n")
-    for i in table_tokens:
-        write_file.writelines(f"{i}")
+    write_file.writelines(f"{table_tokens}")
 

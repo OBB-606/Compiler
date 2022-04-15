@@ -1,0 +1,834 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Unused terminals:
+
+    NEGATION
+
+Grammar
+
+Rule 0     S' -> var
+Rule 1     var -> VAR variable COLON INTEGER_TYPE SEMI_COLON body
+Rule 2     var -> VAR variable COLON FLOAT_TYPE SEMI_COLON body
+Rule 3     body -> <empty>
+Rule 4     body -> body lines colons
+Rule 5     body -> BEGIN lines colons END
+Rule 6     colons -> SEMI_COLON
+Rule 7     colons -> colons SEMI_COLON
+Rule 8     lines -> assign
+Rule 9     lines -> while
+Rule 10    lines -> PRINT args
+Rule 11    assign -> VARIABLE EQUAL expr
+Rule 12    expr -> fact
+Rule 13    expr -> expr SUM fact
+Rule 14    expr -> expr MINUS fact
+Rule 15    fact -> term
+Rule 16    term -> arg
+Rule 17    term -> OPEN_PAREN expr CLOSE_PAREN
+Rule 18    while -> CYCLE OPEN_PAREN args CLOSE_PAREN BEGIN lines END
+Rule 19    args -> <empty>
+Rule 20    args -> expr
+Rule 21    args -> args COMMA expr
+Rule 22    arg -> variable
+Rule 23    arg -> FLOAT_DIGIT
+Rule 24    arg -> INT_DIGIT
+Rule 25    variable -> VARIABLE
+Rule 26    variable -> VARIABLE COMMA variable
+Rule 27    variable -> <empty>
+
+Terminals, with rules where they appear
+
+BEGIN                : 5 18
+CLOSE_PAREN          : 17 18
+COLON                : 1 2
+COMMA                : 21 26
+CYCLE                : 18
+END                  : 5 18
+EQUAL                : 11
+FLOAT_DIGIT          : 23
+FLOAT_TYPE           : 2
+INTEGER_TYPE         : 1
+INT_DIGIT            : 24
+MINUS                : 14
+NEGATION             : 
+OPEN_PAREN           : 17 18
+PRINT                : 10
+SEMI_COLON           : 1 2 6 7
+SUM                  : 13
+VAR                  : 1 2
+VARIABLE             : 11 25 26
+error                : 
+
+Nonterminals, with rules where they appear
+
+arg                  : 16
+args                 : 10 18 21
+assign               : 8
+body                 : 1 2 4
+colons               : 4 5 7
+expr                 : 11 13 14 17 20 21
+fact                 : 12 13 14
+lines                : 4 5 18
+term                 : 15
+var                  : 0
+variable             : 1 2 22 26
+while                : 9
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . var
+    (1) var -> . VAR variable COLON INTEGER_TYPE SEMI_COLON body
+    (2) var -> . VAR variable COLON FLOAT_TYPE SEMI_COLON body
+
+    VAR             shift and go to state 2
+
+    var                            shift and go to state 1
+
+state 1
+
+    (0) S' -> var .
+
+
+
+state 2
+
+    (1) var -> VAR . variable COLON INTEGER_TYPE SEMI_COLON body
+    (2) var -> VAR . variable COLON FLOAT_TYPE SEMI_COLON body
+    (25) variable -> . VARIABLE
+    (26) variable -> . VARIABLE COMMA variable
+    (27) variable -> .
+
+    VARIABLE        shift and go to state 4
+    COLON           reduce using rule 27 (variable -> .)
+
+    variable                       shift and go to state 3
+
+state 3
+
+    (1) var -> VAR variable . COLON INTEGER_TYPE SEMI_COLON body
+    (2) var -> VAR variable . COLON FLOAT_TYPE SEMI_COLON body
+
+    COLON           shift and go to state 5
+
+
+state 4
+
+    (25) variable -> VARIABLE .
+    (26) variable -> VARIABLE . COMMA variable
+
+  ! shift/reduce conflict for COMMA resolved as shift
+    COLON           reduce using rule 25 (variable -> VARIABLE .)
+    SUM             reduce using rule 25 (variable -> VARIABLE .)
+    MINUS           reduce using rule 25 (variable -> VARIABLE .)
+    SEMI_COLON      reduce using rule 25 (variable -> VARIABLE .)
+    END             reduce using rule 25 (variable -> VARIABLE .)
+    CLOSE_PAREN     reduce using rule 25 (variable -> VARIABLE .)
+    COMMA           shift and go to state 6
+
+  ! COMMA           [ reduce using rule 25 (variable -> VARIABLE .) ]
+
+
+state 5
+
+    (1) var -> VAR variable COLON . INTEGER_TYPE SEMI_COLON body
+    (2) var -> VAR variable COLON . FLOAT_TYPE SEMI_COLON body
+
+    INTEGER_TYPE    shift and go to state 7
+    FLOAT_TYPE      shift and go to state 8
+
+
+state 6
+
+    (26) variable -> VARIABLE COMMA . variable
+    (25) variable -> . VARIABLE
+    (26) variable -> . VARIABLE COMMA variable
+    (27) variable -> .
+
+    VARIABLE        shift and go to state 4
+    COLON           reduce using rule 27 (variable -> .)
+    SUM             reduce using rule 27 (variable -> .)
+    MINUS           reduce using rule 27 (variable -> .)
+    COMMA           reduce using rule 27 (variable -> .)
+    SEMI_COLON      reduce using rule 27 (variable -> .)
+    END             reduce using rule 27 (variable -> .)
+    CLOSE_PAREN     reduce using rule 27 (variable -> .)
+
+    variable                       shift and go to state 9
+
+state 7
+
+    (1) var -> VAR variable COLON INTEGER_TYPE . SEMI_COLON body
+
+    SEMI_COLON      shift and go to state 10
+
+
+state 8
+
+    (2) var -> VAR variable COLON FLOAT_TYPE . SEMI_COLON body
+
+    SEMI_COLON      shift and go to state 11
+
+
+state 9
+
+    (26) variable -> VARIABLE COMMA variable .
+
+    COLON           reduce using rule 26 (variable -> VARIABLE COMMA variable .)
+    SUM             reduce using rule 26 (variable -> VARIABLE COMMA variable .)
+    MINUS           reduce using rule 26 (variable -> VARIABLE COMMA variable .)
+    COMMA           reduce using rule 26 (variable -> VARIABLE COMMA variable .)
+    SEMI_COLON      reduce using rule 26 (variable -> VARIABLE COMMA variable .)
+    END             reduce using rule 26 (variable -> VARIABLE COMMA variable .)
+    CLOSE_PAREN     reduce using rule 26 (variable -> VARIABLE COMMA variable .)
+
+
+state 10
+
+    (1) var -> VAR variable COLON INTEGER_TYPE SEMI_COLON . body
+    (3) body -> .
+    (4) body -> . body lines colons
+    (5) body -> . BEGIN lines colons END
+
+    PRINT           reduce using rule 3 (body -> .)
+    VARIABLE        reduce using rule 3 (body -> .)
+    CYCLE           reduce using rule 3 (body -> .)
+    $end            reduce using rule 3 (body -> .)
+    BEGIN           shift and go to state 13
+
+    body                           shift and go to state 12
+
+state 11
+
+    (2) var -> VAR variable COLON FLOAT_TYPE SEMI_COLON . body
+    (3) body -> .
+    (4) body -> . body lines colons
+    (5) body -> . BEGIN lines colons END
+
+    PRINT           reduce using rule 3 (body -> .)
+    VARIABLE        reduce using rule 3 (body -> .)
+    CYCLE           reduce using rule 3 (body -> .)
+    $end            reduce using rule 3 (body -> .)
+    BEGIN           shift and go to state 13
+
+    body                           shift and go to state 14
+
+state 12
+
+    (1) var -> VAR variable COLON INTEGER_TYPE SEMI_COLON body .
+    (4) body -> body . lines colons
+    (8) lines -> . assign
+    (9) lines -> . while
+    (10) lines -> . PRINT args
+    (11) assign -> . VARIABLE EQUAL expr
+    (18) while -> . CYCLE OPEN_PAREN args CLOSE_PAREN BEGIN lines END
+
+    $end            reduce using rule 1 (var -> VAR variable COLON INTEGER_TYPE SEMI_COLON body .)
+    PRINT           shift and go to state 18
+    VARIABLE        shift and go to state 19
+    CYCLE           shift and go to state 20
+
+    lines                          shift and go to state 15
+    assign                         shift and go to state 16
+    while                          shift and go to state 17
+
+state 13
+
+    (5) body -> BEGIN . lines colons END
+    (8) lines -> . assign
+    (9) lines -> . while
+    (10) lines -> . PRINT args
+    (11) assign -> . VARIABLE EQUAL expr
+    (18) while -> . CYCLE OPEN_PAREN args CLOSE_PAREN BEGIN lines END
+
+    PRINT           shift and go to state 18
+    VARIABLE        shift and go to state 19
+    CYCLE           shift and go to state 20
+
+    lines                          shift and go to state 21
+    assign                         shift and go to state 16
+    while                          shift and go to state 17
+
+state 14
+
+    (2) var -> VAR variable COLON FLOAT_TYPE SEMI_COLON body .
+    (4) body -> body . lines colons
+    (8) lines -> . assign
+    (9) lines -> . while
+    (10) lines -> . PRINT args
+    (11) assign -> . VARIABLE EQUAL expr
+    (18) while -> . CYCLE OPEN_PAREN args CLOSE_PAREN BEGIN lines END
+
+    $end            reduce using rule 2 (var -> VAR variable COLON FLOAT_TYPE SEMI_COLON body .)
+    PRINT           shift and go to state 18
+    VARIABLE        shift and go to state 19
+    CYCLE           shift and go to state 20
+
+    lines                          shift and go to state 15
+    assign                         shift and go to state 16
+    while                          shift and go to state 17
+
+state 15
+
+    (4) body -> body lines . colons
+    (6) colons -> . SEMI_COLON
+    (7) colons -> . colons SEMI_COLON
+
+    SEMI_COLON      shift and go to state 23
+
+    colons                         shift and go to state 22
+
+state 16
+
+    (8) lines -> assign .
+
+    SEMI_COLON      reduce using rule 8 (lines -> assign .)
+    END             reduce using rule 8 (lines -> assign .)
+
+
+state 17
+
+    (9) lines -> while .
+
+    SEMI_COLON      reduce using rule 9 (lines -> while .)
+    END             reduce using rule 9 (lines -> while .)
+
+
+state 18
+
+    (10) lines -> PRINT . args
+    (19) args -> .
+    (20) args -> . expr
+    (21) args -> . args COMMA expr
+    (12) expr -> . fact
+    (13) expr -> . expr SUM fact
+    (14) expr -> . expr MINUS fact
+    (15) fact -> . term
+    (16) term -> . arg
+    (17) term -> . OPEN_PAREN expr CLOSE_PAREN
+    (22) arg -> . variable
+    (23) arg -> . FLOAT_DIGIT
+    (24) arg -> . INT_DIGIT
+    (25) variable -> . VARIABLE
+    (26) variable -> . VARIABLE COMMA variable
+    (27) variable -> .
+
+  ! reduce/reduce conflict for COMMA resolved using rule 19 (args -> .)
+  ! reduce/reduce conflict for SEMI_COLON resolved using rule 19 (args -> .)
+  ! reduce/reduce conflict for END resolved using rule 19 (args -> .)
+    COMMA           reduce using rule 19 (args -> .)
+    SEMI_COLON      reduce using rule 19 (args -> .)
+    END             reduce using rule 19 (args -> .)
+    OPEN_PAREN      shift and go to state 29
+    FLOAT_DIGIT     shift and go to state 31
+    INT_DIGIT       shift and go to state 32
+    VARIABLE        shift and go to state 4
+    SUM             reduce using rule 27 (variable -> .)
+    MINUS           reduce using rule 27 (variable -> .)
+
+  ! COMMA           [ reduce using rule 27 (variable -> .) ]
+  ! SEMI_COLON      [ reduce using rule 27 (variable -> .) ]
+  ! END             [ reduce using rule 27 (variable -> .) ]
+
+    args                           shift and go to state 24
+    expr                           shift and go to state 25
+    fact                           shift and go to state 26
+    term                           shift and go to state 27
+    arg                            shift and go to state 28
+    variable                       shift and go to state 30
+
+state 19
+
+    (11) assign -> VARIABLE . EQUAL expr
+
+    EQUAL           shift and go to state 33
+
+
+state 20
+
+    (18) while -> CYCLE . OPEN_PAREN args CLOSE_PAREN BEGIN lines END
+
+    OPEN_PAREN      shift and go to state 34
+
+
+state 21
+
+    (5) body -> BEGIN lines . colons END
+    (6) colons -> . SEMI_COLON
+    (7) colons -> . colons SEMI_COLON
+
+    SEMI_COLON      shift and go to state 23
+
+    colons                         shift and go to state 35
+
+state 22
+
+    (4) body -> body lines colons .
+    (7) colons -> colons . SEMI_COLON
+
+    PRINT           reduce using rule 4 (body -> body lines colons .)
+    VARIABLE        reduce using rule 4 (body -> body lines colons .)
+    CYCLE           reduce using rule 4 (body -> body lines colons .)
+    $end            reduce using rule 4 (body -> body lines colons .)
+    SEMI_COLON      shift and go to state 36
+
+
+state 23
+
+    (6) colons -> SEMI_COLON .
+
+    SEMI_COLON      reduce using rule 6 (colons -> SEMI_COLON .)
+    PRINT           reduce using rule 6 (colons -> SEMI_COLON .)
+    VARIABLE        reduce using rule 6 (colons -> SEMI_COLON .)
+    CYCLE           reduce using rule 6 (colons -> SEMI_COLON .)
+    $end            reduce using rule 6 (colons -> SEMI_COLON .)
+    END             reduce using rule 6 (colons -> SEMI_COLON .)
+
+
+state 24
+
+    (10) lines -> PRINT args .
+    (21) args -> args . COMMA expr
+
+    SEMI_COLON      reduce using rule 10 (lines -> PRINT args .)
+    END             reduce using rule 10 (lines -> PRINT args .)
+    COMMA           shift and go to state 37
+
+
+state 25
+
+    (20) args -> expr .
+    (13) expr -> expr . SUM fact
+    (14) expr -> expr . MINUS fact
+
+    COMMA           reduce using rule 20 (args -> expr .)
+    SEMI_COLON      reduce using rule 20 (args -> expr .)
+    END             reduce using rule 20 (args -> expr .)
+    CLOSE_PAREN     reduce using rule 20 (args -> expr .)
+    SUM             shift and go to state 38
+    MINUS           shift and go to state 39
+
+
+state 26
+
+    (12) expr -> fact .
+
+    SUM             reduce using rule 12 (expr -> fact .)
+    MINUS           reduce using rule 12 (expr -> fact .)
+    COMMA           reduce using rule 12 (expr -> fact .)
+    SEMI_COLON      reduce using rule 12 (expr -> fact .)
+    END             reduce using rule 12 (expr -> fact .)
+    CLOSE_PAREN     reduce using rule 12 (expr -> fact .)
+
+
+state 27
+
+    (15) fact -> term .
+
+    SUM             reduce using rule 15 (fact -> term .)
+    MINUS           reduce using rule 15 (fact -> term .)
+    COMMA           reduce using rule 15 (fact -> term .)
+    SEMI_COLON      reduce using rule 15 (fact -> term .)
+    END             reduce using rule 15 (fact -> term .)
+    CLOSE_PAREN     reduce using rule 15 (fact -> term .)
+
+
+state 28
+
+    (16) term -> arg .
+
+    SUM             reduce using rule 16 (term -> arg .)
+    MINUS           reduce using rule 16 (term -> arg .)
+    COMMA           reduce using rule 16 (term -> arg .)
+    SEMI_COLON      reduce using rule 16 (term -> arg .)
+    END             reduce using rule 16 (term -> arg .)
+    CLOSE_PAREN     reduce using rule 16 (term -> arg .)
+
+
+state 29
+
+    (17) term -> OPEN_PAREN . expr CLOSE_PAREN
+    (12) expr -> . fact
+    (13) expr -> . expr SUM fact
+    (14) expr -> . expr MINUS fact
+    (15) fact -> . term
+    (16) term -> . arg
+    (17) term -> . OPEN_PAREN expr CLOSE_PAREN
+    (22) arg -> . variable
+    (23) arg -> . FLOAT_DIGIT
+    (24) arg -> . INT_DIGIT
+    (25) variable -> . VARIABLE
+    (26) variable -> . VARIABLE COMMA variable
+    (27) variable -> .
+
+    OPEN_PAREN      shift and go to state 29
+    FLOAT_DIGIT     shift and go to state 31
+    INT_DIGIT       shift and go to state 32
+    VARIABLE        shift and go to state 4
+    CLOSE_PAREN     reduce using rule 27 (variable -> .)
+    SUM             reduce using rule 27 (variable -> .)
+    MINUS           reduce using rule 27 (variable -> .)
+
+    expr                           shift and go to state 40
+    fact                           shift and go to state 26
+    term                           shift and go to state 27
+    arg                            shift and go to state 28
+    variable                       shift and go to state 30
+
+state 30
+
+    (22) arg -> variable .
+
+    SUM             reduce using rule 22 (arg -> variable .)
+    MINUS           reduce using rule 22 (arg -> variable .)
+    COMMA           reduce using rule 22 (arg -> variable .)
+    SEMI_COLON      reduce using rule 22 (arg -> variable .)
+    END             reduce using rule 22 (arg -> variable .)
+    CLOSE_PAREN     reduce using rule 22 (arg -> variable .)
+
+
+state 31
+
+    (23) arg -> FLOAT_DIGIT .
+
+    SUM             reduce using rule 23 (arg -> FLOAT_DIGIT .)
+    MINUS           reduce using rule 23 (arg -> FLOAT_DIGIT .)
+    COMMA           reduce using rule 23 (arg -> FLOAT_DIGIT .)
+    SEMI_COLON      reduce using rule 23 (arg -> FLOAT_DIGIT .)
+    END             reduce using rule 23 (arg -> FLOAT_DIGIT .)
+    CLOSE_PAREN     reduce using rule 23 (arg -> FLOAT_DIGIT .)
+
+
+state 32
+
+    (24) arg -> INT_DIGIT .
+
+    SUM             reduce using rule 24 (arg -> INT_DIGIT .)
+    MINUS           reduce using rule 24 (arg -> INT_DIGIT .)
+    COMMA           reduce using rule 24 (arg -> INT_DIGIT .)
+    SEMI_COLON      reduce using rule 24 (arg -> INT_DIGIT .)
+    END             reduce using rule 24 (arg -> INT_DIGIT .)
+    CLOSE_PAREN     reduce using rule 24 (arg -> INT_DIGIT .)
+
+
+state 33
+
+    (11) assign -> VARIABLE EQUAL . expr
+    (12) expr -> . fact
+    (13) expr -> . expr SUM fact
+    (14) expr -> . expr MINUS fact
+    (15) fact -> . term
+    (16) term -> . arg
+    (17) term -> . OPEN_PAREN expr CLOSE_PAREN
+    (22) arg -> . variable
+    (23) arg -> . FLOAT_DIGIT
+    (24) arg -> . INT_DIGIT
+    (25) variable -> . VARIABLE
+    (26) variable -> . VARIABLE COMMA variable
+    (27) variable -> .
+
+    OPEN_PAREN      shift and go to state 29
+    FLOAT_DIGIT     shift and go to state 31
+    INT_DIGIT       shift and go to state 32
+    VARIABLE        shift and go to state 4
+    SUM             reduce using rule 27 (variable -> .)
+    MINUS           reduce using rule 27 (variable -> .)
+    SEMI_COLON      reduce using rule 27 (variable -> .)
+    END             reduce using rule 27 (variable -> .)
+
+    expr                           shift and go to state 41
+    fact                           shift and go to state 26
+    term                           shift and go to state 27
+    arg                            shift and go to state 28
+    variable                       shift and go to state 30
+
+state 34
+
+    (18) while -> CYCLE OPEN_PAREN . args CLOSE_PAREN BEGIN lines END
+    (19) args -> .
+    (20) args -> . expr
+    (21) args -> . args COMMA expr
+    (12) expr -> . fact
+    (13) expr -> . expr SUM fact
+    (14) expr -> . expr MINUS fact
+    (15) fact -> . term
+    (16) term -> . arg
+    (17) term -> . OPEN_PAREN expr CLOSE_PAREN
+    (22) arg -> . variable
+    (23) arg -> . FLOAT_DIGIT
+    (24) arg -> . INT_DIGIT
+    (25) variable -> . VARIABLE
+    (26) variable -> . VARIABLE COMMA variable
+    (27) variable -> .
+
+  ! reduce/reduce conflict for CLOSE_PAREN resolved using rule 19 (args -> .)
+  ! reduce/reduce conflict for COMMA resolved using rule 19 (args -> .)
+    CLOSE_PAREN     reduce using rule 19 (args -> .)
+    COMMA           reduce using rule 19 (args -> .)
+    OPEN_PAREN      shift and go to state 29
+    FLOAT_DIGIT     shift and go to state 31
+    INT_DIGIT       shift and go to state 32
+    VARIABLE        shift and go to state 4
+    SUM             reduce using rule 27 (variable -> .)
+    MINUS           reduce using rule 27 (variable -> .)
+
+  ! CLOSE_PAREN     [ reduce using rule 27 (variable -> .) ]
+  ! COMMA           [ reduce using rule 27 (variable -> .) ]
+
+    args                           shift and go to state 42
+    expr                           shift and go to state 25
+    fact                           shift and go to state 26
+    term                           shift and go to state 27
+    arg                            shift and go to state 28
+    variable                       shift and go to state 30
+
+state 35
+
+    (5) body -> BEGIN lines colons . END
+    (7) colons -> colons . SEMI_COLON
+
+    END             shift and go to state 43
+    SEMI_COLON      shift and go to state 36
+
+
+state 36
+
+    (7) colons -> colons SEMI_COLON .
+
+    SEMI_COLON      reduce using rule 7 (colons -> colons SEMI_COLON .)
+    PRINT           reduce using rule 7 (colons -> colons SEMI_COLON .)
+    VARIABLE        reduce using rule 7 (colons -> colons SEMI_COLON .)
+    CYCLE           reduce using rule 7 (colons -> colons SEMI_COLON .)
+    $end            reduce using rule 7 (colons -> colons SEMI_COLON .)
+    END             reduce using rule 7 (colons -> colons SEMI_COLON .)
+
+
+state 37
+
+    (21) args -> args COMMA . expr
+    (12) expr -> . fact
+    (13) expr -> . expr SUM fact
+    (14) expr -> . expr MINUS fact
+    (15) fact -> . term
+    (16) term -> . arg
+    (17) term -> . OPEN_PAREN expr CLOSE_PAREN
+    (22) arg -> . variable
+    (23) arg -> . FLOAT_DIGIT
+    (24) arg -> . INT_DIGIT
+    (25) variable -> . VARIABLE
+    (26) variable -> . VARIABLE COMMA variable
+    (27) variable -> .
+
+    OPEN_PAREN      shift and go to state 29
+    FLOAT_DIGIT     shift and go to state 31
+    INT_DIGIT       shift and go to state 32
+    VARIABLE        shift and go to state 4
+    SUM             reduce using rule 27 (variable -> .)
+    MINUS           reduce using rule 27 (variable -> .)
+    COMMA           reduce using rule 27 (variable -> .)
+    SEMI_COLON      reduce using rule 27 (variable -> .)
+    END             reduce using rule 27 (variable -> .)
+    CLOSE_PAREN     reduce using rule 27 (variable -> .)
+
+    expr                           shift and go to state 44
+    fact                           shift and go to state 26
+    term                           shift and go to state 27
+    arg                            shift and go to state 28
+    variable                       shift and go to state 30
+
+state 38
+
+    (13) expr -> expr SUM . fact
+    (15) fact -> . term
+    (16) term -> . arg
+    (17) term -> . OPEN_PAREN expr CLOSE_PAREN
+    (22) arg -> . variable
+    (23) arg -> . FLOAT_DIGIT
+    (24) arg -> . INT_DIGIT
+    (25) variable -> . VARIABLE
+    (26) variable -> . VARIABLE COMMA variable
+    (27) variable -> .
+
+    OPEN_PAREN      shift and go to state 29
+    FLOAT_DIGIT     shift and go to state 31
+    INT_DIGIT       shift and go to state 32
+    VARIABLE        shift and go to state 4
+    SUM             reduce using rule 27 (variable -> .)
+    MINUS           reduce using rule 27 (variable -> .)
+    COMMA           reduce using rule 27 (variable -> .)
+    SEMI_COLON      reduce using rule 27 (variable -> .)
+    END             reduce using rule 27 (variable -> .)
+    CLOSE_PAREN     reduce using rule 27 (variable -> .)
+
+    fact                           shift and go to state 45
+    term                           shift and go to state 27
+    arg                            shift and go to state 28
+    variable                       shift and go to state 30
+
+state 39
+
+    (14) expr -> expr MINUS . fact
+    (15) fact -> . term
+    (16) term -> . arg
+    (17) term -> . OPEN_PAREN expr CLOSE_PAREN
+    (22) arg -> . variable
+    (23) arg -> . FLOAT_DIGIT
+    (24) arg -> . INT_DIGIT
+    (25) variable -> . VARIABLE
+    (26) variable -> . VARIABLE COMMA variable
+    (27) variable -> .
+
+    OPEN_PAREN      shift and go to state 29
+    FLOAT_DIGIT     shift and go to state 31
+    INT_DIGIT       shift and go to state 32
+    VARIABLE        shift and go to state 4
+    SUM             reduce using rule 27 (variable -> .)
+    MINUS           reduce using rule 27 (variable -> .)
+    COMMA           reduce using rule 27 (variable -> .)
+    SEMI_COLON      reduce using rule 27 (variable -> .)
+    END             reduce using rule 27 (variable -> .)
+    CLOSE_PAREN     reduce using rule 27 (variable -> .)
+
+    fact                           shift and go to state 46
+    term                           shift and go to state 27
+    arg                            shift and go to state 28
+    variable                       shift and go to state 30
+
+state 40
+
+    (17) term -> OPEN_PAREN expr . CLOSE_PAREN
+    (13) expr -> expr . SUM fact
+    (14) expr -> expr . MINUS fact
+
+    CLOSE_PAREN     shift and go to state 47
+    SUM             shift and go to state 38
+    MINUS           shift and go to state 39
+
+
+state 41
+
+    (11) assign -> VARIABLE EQUAL expr .
+    (13) expr -> expr . SUM fact
+    (14) expr -> expr . MINUS fact
+
+    SEMI_COLON      reduce using rule 11 (assign -> VARIABLE EQUAL expr .)
+    END             reduce using rule 11 (assign -> VARIABLE EQUAL expr .)
+    SUM             shift and go to state 38
+    MINUS           shift and go to state 39
+
+
+state 42
+
+    (18) while -> CYCLE OPEN_PAREN args . CLOSE_PAREN BEGIN lines END
+    (21) args -> args . COMMA expr
+
+    CLOSE_PAREN     shift and go to state 48
+    COMMA           shift and go to state 37
+
+
+state 43
+
+    (5) body -> BEGIN lines colons END .
+
+    PRINT           reduce using rule 5 (body -> BEGIN lines colons END .)
+    VARIABLE        reduce using rule 5 (body -> BEGIN lines colons END .)
+    CYCLE           reduce using rule 5 (body -> BEGIN lines colons END .)
+    $end            reduce using rule 5 (body -> BEGIN lines colons END .)
+
+
+state 44
+
+    (21) args -> args COMMA expr .
+    (13) expr -> expr . SUM fact
+    (14) expr -> expr . MINUS fact
+
+    COMMA           reduce using rule 21 (args -> args COMMA expr .)
+    SEMI_COLON      reduce using rule 21 (args -> args COMMA expr .)
+    END             reduce using rule 21 (args -> args COMMA expr .)
+    CLOSE_PAREN     reduce using rule 21 (args -> args COMMA expr .)
+    SUM             shift and go to state 38
+    MINUS           shift and go to state 39
+
+
+state 45
+
+    (13) expr -> expr SUM fact .
+
+    SUM             reduce using rule 13 (expr -> expr SUM fact .)
+    MINUS           reduce using rule 13 (expr -> expr SUM fact .)
+    COMMA           reduce using rule 13 (expr -> expr SUM fact .)
+    SEMI_COLON      reduce using rule 13 (expr -> expr SUM fact .)
+    END             reduce using rule 13 (expr -> expr SUM fact .)
+    CLOSE_PAREN     reduce using rule 13 (expr -> expr SUM fact .)
+
+
+state 46
+
+    (14) expr -> expr MINUS fact .
+
+    SUM             reduce using rule 14 (expr -> expr MINUS fact .)
+    MINUS           reduce using rule 14 (expr -> expr MINUS fact .)
+    COMMA           reduce using rule 14 (expr -> expr MINUS fact .)
+    SEMI_COLON      reduce using rule 14 (expr -> expr MINUS fact .)
+    END             reduce using rule 14 (expr -> expr MINUS fact .)
+    CLOSE_PAREN     reduce using rule 14 (expr -> expr MINUS fact .)
+
+
+state 47
+
+    (17) term -> OPEN_PAREN expr CLOSE_PAREN .
+
+    SUM             reduce using rule 17 (term -> OPEN_PAREN expr CLOSE_PAREN .)
+    MINUS           reduce using rule 17 (term -> OPEN_PAREN expr CLOSE_PAREN .)
+    COMMA           reduce using rule 17 (term -> OPEN_PAREN expr CLOSE_PAREN .)
+    SEMI_COLON      reduce using rule 17 (term -> OPEN_PAREN expr CLOSE_PAREN .)
+    END             reduce using rule 17 (term -> OPEN_PAREN expr CLOSE_PAREN .)
+    CLOSE_PAREN     reduce using rule 17 (term -> OPEN_PAREN expr CLOSE_PAREN .)
+
+
+state 48
+
+    (18) while -> CYCLE OPEN_PAREN args CLOSE_PAREN . BEGIN lines END
+
+    BEGIN           shift and go to state 49
+
+
+state 49
+
+    (18) while -> CYCLE OPEN_PAREN args CLOSE_PAREN BEGIN . lines END
+    (8) lines -> . assign
+    (9) lines -> . while
+    (10) lines -> . PRINT args
+    (11) assign -> . VARIABLE EQUAL expr
+    (18) while -> . CYCLE OPEN_PAREN args CLOSE_PAREN BEGIN lines END
+
+    PRINT           shift and go to state 18
+    VARIABLE        shift and go to state 19
+    CYCLE           shift and go to state 20
+
+    lines                          shift and go to state 50
+    assign                         shift and go to state 16
+    while                          shift and go to state 17
+
+state 50
+
+    (18) while -> CYCLE OPEN_PAREN args CLOSE_PAREN BEGIN lines . END
+
+    END             shift and go to state 51
+
+
+state 51
+
+    (18) while -> CYCLE OPEN_PAREN args CLOSE_PAREN BEGIN lines END .
+
+    SEMI_COLON      reduce using rule 18 (while -> CYCLE OPEN_PAREN args CLOSE_PAREN BEGIN lines END .)
+    END             reduce using rule 18 (while -> CYCLE OPEN_PAREN args CLOSE_PAREN BEGIN lines END .)
+
+WARNING: 
+WARNING: Conflicts:
+WARNING: 
+WARNING: shift/reduce conflict for COMMA in state 4 resolved as shift
+WARNING: reduce/reduce conflict in state 18 resolved using rule (args -> <empty>)
+WARNING: rejected rule (variable -> <empty>) in state 18
+WARNING: reduce/reduce conflict in state 34 resolved using rule (args -> <empty>)
+WARNING: rejected rule (variable -> <empty>) in state 34

@@ -19,10 +19,21 @@ tokens = (
     'PRINT', "OPEN_PAREN","CLOSE_PAREN","SEMI_COLON",
     "SUM","MINUS","VARIABLE","COLON","EQUAL","CYCLE",
     "INTEGER_TYPE","FLOAT_TYPE", "VAR", "COMMA",
-    "NEGATION"
+    "NEGATION", "IF", "ELSE", "MORE", "LESS", "AND", "OR",
+    "BREAK", "CONTINUE", "MULTIPLY", "DIVISION"
 )
 # int_first = r"[=\+\-\*]\d+[=\+\-;\)\*]"
 # float_first = r"[=\+\-\*\(]\d+\.\d+[=\+\-\*;\)]"
+t_IF = r"if"
+t_ELSE = r"else"
+t_MORE = r">"
+t_LESS = r"<"
+t_AND = r"and"
+t_OR = r"or"
+t_MULTIPLY = r"\*"
+t_DIVISION = r"/"
+t_BREAK = r"break"
+t_CONTINUE = r"continue"
 t_INT_DIGIT = r"\d+"
 t_FLOAT_DIGIT = r"\d+\.\d+"
 ident = r"[a-z]\w*"
@@ -51,7 +62,7 @@ def t_error(t):
 
 lexer = lex.lex(reflags=re.UNICODE | re.DOTALL)
 
-with open ("/media/valery/F/Volery/Compiler_PA_6_sem/program") as read_file:
+with open ("/media/valery/F/Volery/Compiler_PA_6_sem/program_2") as read_file:
     tmp = read_file.read()
 data = "".join(tmp.split())
 print(data)

@@ -18,10 +18,11 @@ class Node:
         self.parts = parts
 
 def p_var(p):
-    '''var : VAR variable COLON INTEGER_TYPE SEMI_COLON body
-           | VAR variable COLON FLOAT_TYPE SEMI_COLON body'''
+    '''var : VAR variable COLON type SEMI_COLON body'''
     p[0] = Node(p[4], [p[2]])
-
+def p_type(p):
+    '''type : INTEGER_TYPE
+            | FLOAT_TYPE'''
 def p_body(p):
     '''body :
             | body lines colons

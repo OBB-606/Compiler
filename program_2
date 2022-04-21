@@ -1,0 +1,39 @@
+var
+    $a, $b, $c, $counter: integer;
+
+    $d, $e: float;
+begin
+    $counter = 0;
+    $a = 10;
+    $b = 20;
+    $c = 30;
+    while ($a > 0)
+    begin
+        if (($counter * 2) > 13)
+        begin
+            print($counter);
+            $counter = $counter + 1;
+            $a = $a - 1;
+        end
+    end
+    $d = 13.23;
+    $e = 2.2;
+    while ($b < $c)
+    begin
+        if ((($b != 25) and ($c != 25)) or ($d > 5.0))
+        begin
+            if ($d < 5.0)
+            begin
+                break;
+            end
+            else
+            begin
+                continue;
+            end
+            print($b);
+            $d = $d - 1.0;
+            $b = $b + 1;
+            $c = $c - 1;
+        end
+    end
+end

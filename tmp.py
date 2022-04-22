@@ -1,10 +1,5 @@
-def rock (color: str):
-    print(f"{color} is  rock!")
+from re import findall
 
-
-rock_dict: dict = {
-    'blue': rock
-}
-
-inp = input("write the color: ")
-rock_dict.get(inp)(inp)
+input = "<head>sfssf</head><title>Rock</title>"
+template = r"<title>(\w+)</title>"
+print(findall(template, input))

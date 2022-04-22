@@ -36,4 +36,9 @@ begin
             $c = $c - 1;
         end
     end
+    function #main ($rock, $rock_2)
+    begin
+        print($rock + $rock_2);
+    end
+    call #main($a, $b);
 end

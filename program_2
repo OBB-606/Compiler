@@ -26,19 +26,15 @@ begin
             begin
                 break;
             end
-            else
-            begin
-                continue;
-            end
             print($b);
             $d = $d - 1.0;
             $b = $b + 1;
             $c = $c - 1;
         end
     end
-    function #main ($rock, $rock_2)
+    function #main ($rock, $rock2)
     begin
-        print($rock + $rock_2);
+        print($rock + $rock2);
     end
     call #main($a, $b);
 end

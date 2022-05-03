@@ -6,7 +6,7 @@ begin
     $b = $a + 45;
     $c = $b - 14;
     $d = 11.1345;
-    while ($a = 0)
+    while ($a != 0)
     begin
         $a = $a - 1;
         print($a);

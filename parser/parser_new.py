@@ -1,6 +1,7 @@
 from lexer.lexer_ply_test import tokens
 import ply.yacc as yacc
 
+        
 def p_program (p):
     '''program :
                 | block colons body'''
@@ -44,12 +45,10 @@ def p_lines (p):
              | if
              | call'''
 def p_assign (p):
-    '''assign :
-              | variables EQUAL expression'''
+    '''assign : variables EQUAL expression'''
 
 def p_call (p):
-    '''call :
-            | CALL NAME_FUNCTION variables'''
+    '''call : CALL NAME_FUNCTION variables'''
 
 def p_function (p):
     '''function :
@@ -60,33 +59,28 @@ def p_cycle (p):
              | CYCLE condition body'''
 
 def p_if (p):
-    '''if :
-          | IF condition body else body'''
+    '''if : IF condition body else body'''
 
 def p_else (p):
     '''else :
             | ELSE'''
 
 def p_condition (p):
-    '''condition :
-                 | expression comparison expression
+    '''condition : expression comparison expression
                  | OPEN_PAREN condition CLOSE_PAREN logic_op'''
 
 def p_logic_op (p):
-    '''logic_op :
-                | AND
+    '''logic_op : AND
                 | OR
                 | NEGATION'''
 
 def p_comparison (p):
-    '''comparison :
-                | MORE
+    '''comparison : MORE
                 | LESS
                 | LOGIC_EQUAL'''
 
 def p_print (p):
-    '''print :
-             | PRINT expression'''
+    '''print : PRINT expression'''
 
 def p_expression (p):
     '''expression :
@@ -110,6 +104,7 @@ def p_factor (p):
 def p_error(p):
     print("Unexpected Token: ", p)
 
-
-
 parser = yacc.yacc()
+
+def result(code):
+    return parser.parse(code)

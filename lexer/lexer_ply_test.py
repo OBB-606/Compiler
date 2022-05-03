@@ -20,11 +20,10 @@ tokens = (
     "SUM","MINUS","VARIABLE","COLON","EQUAL","CYCLE",
     "INTEGER_TYPE","FLOAT_TYPE", "VAR", "COMMA",
     "NEGATION", "IF", "ELSE", "MORE", "LESS", "AND", "OR",
-    "BREAK", "CONTINUE", "MULTIPLY", "DIVISION", "FUNCTION", "CALL", "NAME_FUNCTION",
-    "LOGIC_EQUAL"
+    "BREAK", "CONTINUE", "MULTIPLY", "DIVISION", "FUNCTION",
+    "CALL", "NAME_FUNCTION", "LOGIC_EQUAL"
 )
-# int_first = r"[=\+\-\*]\d+[=\+\-;\)\*]"
-# float_first = r"[=\+\-\*\(]\d+\.\d+[=\+\-\*;\)]"
+
 t_LOGIC_EQUAL = r"=="
 t_NAME_FUNCTION = r"#\w+"
 t_CALL = r"call"

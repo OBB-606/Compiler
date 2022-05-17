@@ -98,7 +98,6 @@ for i in dict_of_tokens:
     print(f"{i} --> {dict_of_tokens[i]} --> len = {len(dict_of_tokens[i])}")
 
 # print(f"len_program = {len(text_program)}, len_dict_tokens = {sum(summ)}")
-
 # with open("table_of_symbols.json", "w") as json_file_write:
 #     json.dump(dict_of_tokens, json_file_write, indent=2)
 

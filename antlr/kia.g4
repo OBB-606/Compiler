@@ -5,10 +5,10 @@ program
     ;
 
 block
-    : vars? beginstmt
+    : vars_? beginstmt
     ;
 
-vars
+vars_
     : VAR (variable (COMMA variable)* COLON types SEMI_COLON)*
     ;
 
@@ -22,7 +22,7 @@ function
     ;
 
 statement
-    : (assign | call | print | beginstmt | if | while | break_cont | function)*
+    : (assign | call | print_ | beginstmt | if_ | while_ | break_cont | function)*
     ;
 
 assign
@@ -33,7 +33,7 @@ call
     : CALL NAME_FUNCTION OPEN_PAREN variable (COMMA variable)* CLOSE_PAREN
     ;
 
-print
+print_
     : PRINT OPEN_PAREN (variable | literal)* CLOSE_PAREN
     ;
 
@@ -44,11 +44,11 @@ beginstmt
     : BEGIN statement (SEMI_COLON statement)* END
     ;
 
-if
+if_
     : IF OPEN_PAREN condition CLOSE_PAREN beginstmt
     ;
 
-while
+while_
     : CYCLE OPEN_PAREN condition CLOSE_PAREN beginstmt
     ;
 
@@ -72,6 +72,8 @@ compare_operators
         | EQUAL EQUAL
         | LESS
         | MORE_
+        | LESS_EQUAL
+        | MORE_EQUAL
         ;
 
 expression
@@ -97,6 +99,8 @@ digit
     | FLOAT_DIGIT
     ;
 
+MORE_EQUAL : '>=';
+LESS_EQUAL : '<=';
 AND : 'and';
 OR : 'or';
 NEGEQ : '!=';

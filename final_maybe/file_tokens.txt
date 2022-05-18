@@ -1,0 +1,52 @@
++----------+--------------+-------------+----------------+
+| ID Token |  Type token  | Value token | Position token |
++----------+--------------+-------------+----------------+
+|    1     |     VAR      |     var     |       0        |
+|    2     |   VARIABLE   |      $n     |       3        |
+|    3     |    COMMA     |      ,      |       5        |
+|    4     |   VARIABLE   |      $i     |       6        |
+|    5     |    COMMA     |      ,      |       8        |
+|    6     |   VARIABLE   |      $s     |       9        |
+|    7     |    COLON     |      :      |       11       |
+|    8     | INTEGER_TYPE |   integer   |       12       |
+|    9     |  SEMI_COLON  |      ;      |       19       |
+|    10    |    BEGIN     |    begin    |       20       |
+|    11    |   VARIABLE   |      $i     |       25       |
+|    12    |    EQUAL     |      =      |       27       |
+|    13    |  INT_DIGIT   |      1      |       28       |
+|    14    |   VARIABLE   |      $n     |       29       |
+|    15    |    EQUAL     |      =      |       31       |
+|    16    |  INT_DIGIT   |      5      |       32       |
+|    17    |  SEMI_COLON  |      ;      |       33       |
+|    18    |   VARIABLE   |      $s     |       34       |
+|    19    |    EQUAL     |      =      |       36       |
+|    20    |  INT_DIGIT   |      1      |       37       |
+|    21    |  SEMI_COLON  |      ;      |       38       |
+|    22    |    CYCLE     |    while    |       39       |
+|    23    |  OPEN_PAREN  |      (      |       44       |
+|    24    |   VARIABLE   |      $i     |       45       |
+|    25    |     LESS     |      <      |       47       |
+|    26    |    EQUAL     |      =      |       48       |
+|    27    |   VARIABLE   |      $n     |       49       |
+|    28    | CLOSE_PAREN  |      )      |       51       |
+|    29    |    BEGIN     |    begin    |       52       |
+|    30    |   VARIABLE   |      $s     |       57       |
+|    31    |    EQUAL     |      =      |       59       |
+|    32    |   VARIABLE   |      $s     |       60       |
+|    33    |   MULTIPLY   |      *      |       62       |
+|    34    |   VARIABLE   |      $i     |       63       |
+|    35    |  SEMI_COLON  |      ;      |       65       |
+|    36    |   VARIABLE   |      $i     |       66       |
+|    37    |    EQUAL     |      =      |       68       |
+|    38    |   VARIABLE   |      $i     |       69       |
+|    39    |     SUM      |      +      |       71       |
+|    40    |  INT_DIGIT   |      1      |       72       |
+|    41    |  SEMI_COLON  |      ;      |       73       |
+|    42    |     END      |     end     |       74       |
+|    43    |    PRINT     |    print    |       77       |
+|    44    |  OPEN_PAREN  |      (      |       82       |
+|    45    |   VARIABLE   |      $s     |       83       |
+|    46    | CLOSE_PAREN  |      )      |       85       |
+|    47    |  SEMI_COLON  |      ;      |       86       |
+|    48    |     END      |     end     |       87       |
++----------+--------------+-------------+----------------+

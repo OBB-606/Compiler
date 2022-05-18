@@ -5,62 +5,75 @@ program
     ;
 
 block
-    : vars? function* beginstmt*
+    : vars_? beginstmt
     ;
 
-vars
-    : VAR (variable (COMMA variable)* COLON (INTEGER_ | FLOAT_) SEMI_COLON)*
+vars_
+    : VAR (variable (COMMA variable)* COLON types SEMI_COLON)*
     ;
 
-//types
-//    : INTEGER
-//    | FLOAT
-//    ;
+types
+    : FLOAT
+    | INTEGER
+    ;
 
 function
     : FUNCTION NAME_FUNCTION OPEN_PAREN variable CLOSE_PAREN beginstmt
     ;
 
 statement
-    : (assign | call | print | beginstmt | if_ | while_)?
+    : (assign | call | print_ | beginstmt | if_ | while_ | break_cont | function)*
     ;
 
 assign
-    : variable EQUAL expression SEMI_COLON
+    : variable EQUAL expression
     ;
 
 call
     : CALL NAME_FUNCTION OPEN_PAREN variable (COMMA variable)* CLOSE_PAREN
     ;
 
-print
+print_
     : PRINT OPEN_PAREN (variable | literal)* CLOSE_PAREN
     ;
 
 literal
     : STRING;
 
+beginstmt
+    : BEGIN statement (SEMI_COLON statement)* END
+    ;
+
 if_
     : IF OPEN_PAREN condition CLOSE_PAREN beginstmt
     ;
 
 while_
-    : WHILE OPEN_PAREN condition CLOSE_PAREN beginstmt
+    : CYCLE OPEN_PAREN condition CLOSE_PAREN beginstmt
     ;
 
-beginstmt
-    : BEGIN statement (SEMI_COLON statement)* END
+break_cont
+    : BREAK
+    | CONTINUE
     ;
 
 condition
-    : expression compare_operators expression
+    : (OPEN_PAREN* expression CLOSE_PAREN* compare_operators OPEN_PAREN* expression CLOSE_PAREN*)*
+    ;
+
+
+and_or
+    : AND
+    | OR
     ;
 
 compare_operators
-        : NEGATION EQUAL
+        : NEGEQ
         | EQUAL EQUAL
         | LESS
         | MORE_
+        | LESS_EQUAL
+        | MORE_EQUAL
         ;
 
 expression
@@ -86,7 +99,11 @@ digit
     | FLOAT_DIGIT
     ;
 
-
+MORE_EQUAL : '>=';
+LESS_EQUAL : '<=';
+AND : 'and';
+OR : 'or';
+NEGEQ : '!=';
 VAR : 'var';
 COMMA : ',';
 SEMI_COLON : ';';
@@ -98,24 +115,25 @@ NEGATION : '!';
 EQUAL : '=';
 LESS : '<';
 MORE_ : '>';
-STRING : [a-zA-Z]+;
+STRING : '"'[a-zA-Z]+'"';
 END : 'end' | 'END';
 BEGIN : 'begin' | 'BEGIN';
-WHILE : 'while';
-INTEGER_ : 'integer';
-FLOAT_ : 'float';
+CYCLE : 'while';
+INTEGER : 'integer';
+FLOAT : 'float';
 IF : 'if';
 CALL : 'call';
 COLON : ':';
 FUNCTION : 'function';
 NAME_FUNCTION : '#'[a-zA-Z]+;
-VARIABLE : '$'[a-zA-Z]+([0-9])*;
+VARIABLE : '$'[a-zA-Z]+[0-9]*;
 INT_DIGIT : [0-9]+;
 FLOAT_DIGIT : [0-9]+'.'[0-9]+;
 OPEN_PAREN : '(';
 CLOSE_PAREN : ')';
 PRINT : 'print';
-
+BREAK : 'break';
+CONTINUE : 'continue';
 WS : [ \t\r\n] -> skip;
 
 

@@ -6,22 +6,25 @@ table_tokens.field_names = ["ID Token", "Type token", "Value token", "Position t
 
 tokens = (
     'INT_DIGIT','FLOAT_DIGIT','BEGIN', 'END',
-    'PRINT', "OPEN_PAREN","CLOSE_PAREN","SEMI_COLON",
-    "SUM","MINUS","VARIABLE","COLON","EQUAL","CYCLE",
+    'PRINT_', "OPEN_PAREN","CLOSE_PAREN","SEMI_COLON",
+    "SUM","MINUS","VARIABLE","COLON","EQUAL","WHILE_",
     "INTEGER_TYPE","FLOAT_TYPE", "VAR", "COMMA",
-    "NEGATION", "IF", "ELSE", "MORE", "LESS", "AND", "OR",
+    "NEGATION", "IF", "ELSE", "MORE_", "LESS", "AND", "OR",
     "BREAK", "CONTINUE", "MULTIPLY", "DIVISION", "FUNCTION",
-    "CALL", "NAME_FUNCTION", "LOGIC_EQUAL"
+    "CALL", "NAME_FUNCTION", "LOGIC_EQUAL", "LESS_EQUAL",
+    "MORE_EQUAL", "NEGEQ"
 )
-
+t_NEGEQ = r"\!="
 t_LOGIC_EQUAL = r"=="
 t_NAME_FUNCTION = r"#\w+"
 t_CALL = r"call"
 t_FUNCTION = r"function"
 t_IF = r"if"
 t_ELSE = r"else"
-t_MORE = r">"
+t_MORE_ = r">"
 t_LESS = r"<"
+t_LESS_EQUAL = r"<="
+t_MORE_EQUAL = r">="
 t_AND = r"and"
 t_OR = r"or"
 t_MULTIPLY = r"\*"
@@ -30,13 +33,13 @@ t_BREAK = r"break"
 t_CONTINUE = r"continue"
 t_INT_DIGIT = r"\d+"
 t_FLOAT_DIGIT = r"\d+\.\d+"
-ident = r"[a-z]\w*"
+# ident = r"[a-z]\w*"
 t_NEGATION = r"\!"
 t_COMMA = r","
 t_VAR = r"var"
 t_BEGIN = r"begin"
 t_END = r"end"
-t_PRINT = r'print'
+t_PRINT_ = r'print'
 t_OPEN_PAREN = r"\("
 t_CLOSE_PAREN = r"\)"
 t_SEMI_COLON = r";"
@@ -45,7 +48,7 @@ t_SUM = r"\+"
 t_MINUS = r"\-"
 t_VARIABLE = r"\$\w+"
 t_EQUAL = r"="
-t_CYCLE = r"while"
+t_WHILE_ = r"while"
 t_INTEGER_TYPE = r"integer"
 t_FLOAT_TYPE = r"float"
 # r_ignore = '\n\r\t\f'

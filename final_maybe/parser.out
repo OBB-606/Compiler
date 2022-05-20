@@ -1,0 +1,1299 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Unused terminals:
+
+    NEGATION
+
+Grammar
+
+Rule 0     S' -> program
+Rule 1     program -> block
+Rule 2     block -> vars_ beginstmt
+Rule 3     vars_ -> VAR variables COLON types SEMI_COLON
+Rule 4     vars_ -> <empty>
+Rule 5     variables -> VARIABLE COMMA VARIABLE
+Rule 6     variables -> VARIABLE
+Rule 7     types -> INTEGER_TYPE
+Rule 8     types -> FLOAT_TYPE
+Rule 9     statement -> assign
+Rule 10    statement -> call
+Rule 11    statement -> print_
+Rule 12    statement -> if_
+Rule 13    statement -> while_
+Rule 14    statement -> break_cont
+Rule 15    statement -> function
+Rule 16    statement -> vars_
+Rule 17    assign -> VARIABLE EQUAL expression
+Rule 18    call -> CALL NAME_FUNCTION OPEN_PAREN variables CLOSE_PAREN
+Rule 19    print_ -> PRINT_ OPEN_PAREN args_print CLOSE_PAREN
+Rule 20    args_print -> variables
+Rule 21    function -> FUNCTION NAME_FUNCTION OPEN_PAREN variables CLOSE_PAREN beginstmt
+Rule 22    beginstmt -> BEGIN statement SEMI_COLON END
+Rule 23    beginstmt -> beginstmt BEGIN statement SEMI_COLON END
+Rule 24    if_ -> IF OPEN_PAREN condition CLOSE_PAREN beginstmt
+Rule 25    if_ -> IF OPEN_PAREN condition CLOSE_PAREN beginstmt ELSE beginstmt
+Rule 26    while_ -> WHILE_ OPEN_PAREN condition CLOSE_PAREN beginstmt
+Rule 27    break_cont -> BREAK
+Rule 28    break_cont -> CONTINUE
+Rule 29    condition -> expression compare_operators expression
+Rule 30    condition -> OPEN_PAREN expression CLOSE_PAREN compare_operators OPEN_PAREN expression CLOSE_PAREN
+Rule 31    and_or -> AND
+Rule 32    and_or -> OR
+Rule 33    compare_operators -> NEGEQ
+Rule 34    compare_operators -> LOGIC_EQUAL
+Rule 35    compare_operators -> LESS
+Rule 36    compare_operators -> MORE_
+Rule 37    compare_operators -> LESS_EQUAL
+Rule 38    compare_operators -> MORE_EQUAL
+Rule 39    expression -> term SUM term
+Rule 40    expression -> term MINUS term
+Rule 41    expression -> <empty>
+Rule 42    term -> factor
+Rule 43    term -> factor MULTIPLY factor
+Rule 44    term -> factor DIVISION factor
+Rule 45    factor -> VARIABLE
+Rule 46    factor -> digit
+Rule 47    factor -> OPEN_PAREN expression CLOSE_PAREN
+Rule 48    digit -> INT_DIGIT
+Rule 49    digit -> FLOAT_DIGIT
+
+Terminals, with rules where they appear
+
+AND                  : 31
+BEGIN                : 22 23
+BREAK                : 27
+CALL                 : 18
+CLOSE_PAREN          : 18 19 21 24 25 26 30 30 47
+COLON                : 3
+COMMA                : 5
+CONTINUE             : 28
+DIVISION             : 44
+ELSE                 : 25
+END                  : 22 23
+EQUAL                : 17
+FLOAT_DIGIT          : 49
+FLOAT_TYPE           : 8
+FUNCTION             : 21
+IF                   : 24 25
+INTEGER_TYPE         : 7
+INT_DIGIT            : 48
+LESS                 : 35
+LESS_EQUAL           : 37
+LOGIC_EQUAL          : 34
+MINUS                : 40
+MORE_                : 36
+MORE_EQUAL           : 38
+MULTIPLY             : 43
+NAME_FUNCTION        : 18 21
+NEGATION             : 
+NEGEQ                : 33
+OPEN_PAREN           : 18 19 21 24 25 26 30 30 47
+OR                   : 32
+PRINT_               : 19
+SEMI_COLON           : 3 22 23
+SUM                  : 39
+VAR                  : 3
+VARIABLE             : 5 5 6 17 45
+WHILE_               : 26
+error                : 
+
+Nonterminals, with rules where they appear
+
+and_or               : 
+args_print           : 19
+assign               : 9
+beginstmt            : 2 21 23 24 25 25 26
+block                : 1
+break_cont           : 14
+call                 : 10
+compare_operators    : 29 30
+condition            : 24 25 26
+digit                : 46
+expression           : 17 29 29 30 30 47
+factor               : 42 43 43 44 44
+function             : 15
+if_                  : 12
+print_               : 11
+program              : 0
+statement            : 22 23
+term                 : 39 39 40 40
+types                : 3
+variables            : 3 18 20 21
+vars_                : 2 16
+while_               : 13
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . program
+    (1) program -> . block
+    (2) block -> . vars_ beginstmt
+    (3) vars_ -> . VAR variables COLON types SEMI_COLON
+    (4) vars_ -> .
+
+    VAR             shift and go to state 4
+    BEGIN           reduce using rule 4 (vars_ -> .)
+
+    program                        shift and go to state 1
+    block                          shift and go to state 2
+    vars_                          shift and go to state 3
+
+state 1
+
+    (0) S' -> program .
+
+
+
+state 2
+
+    (1) program -> block .
+
+    $end            reduce using rule 1 (program -> block .)
+
+
+state 3
+
+    (2) block -> vars_ . beginstmt
+    (22) beginstmt -> . BEGIN statement SEMI_COLON END
+    (23) beginstmt -> . beginstmt BEGIN statement SEMI_COLON END
+
+    BEGIN           shift and go to state 6
+
+    beginstmt                      shift and go to state 5
+
+state 4
+
+    (3) vars_ -> VAR . variables COLON types SEMI_COLON
+    (5) variables -> . VARIABLE COMMA VARIABLE
+    (6) variables -> . VARIABLE
+
+    VARIABLE        shift and go to state 8
+
+    variables                      shift and go to state 7
+
+state 5
+
+    (2) block -> vars_ beginstmt .
+    (23) beginstmt -> beginstmt . BEGIN statement SEMI_COLON END
+
+    $end            reduce using rule 2 (block -> vars_ beginstmt .)
+    BEGIN           shift and go to state 9
+
+
+state 6
+
+    (22) beginstmt -> BEGIN . statement SEMI_COLON END
+    (9) statement -> . assign
+    (10) statement -> . call
+    (11) statement -> . print_
+    (12) statement -> . if_
+    (13) statement -> . while_
+    (14) statement -> . break_cont
+    (15) statement -> . function
+    (16) statement -> . vars_
+    (17) assign -> . VARIABLE EQUAL expression
+    (18) call -> . CALL NAME_FUNCTION OPEN_PAREN variables CLOSE_PAREN
+    (19) print_ -> . PRINT_ OPEN_PAREN args_print CLOSE_PAREN
+    (24) if_ -> . IF OPEN_PAREN condition CLOSE_PAREN beginstmt
+    (25) if_ -> . IF OPEN_PAREN condition CLOSE_PAREN beginstmt ELSE beginstmt
+    (26) while_ -> . WHILE_ OPEN_PAREN condition CLOSE_PAREN beginstmt
+    (27) break_cont -> . BREAK
+    (28) break_cont -> . CONTINUE
+    (21) function -> . FUNCTION NAME_FUNCTION OPEN_PAREN variables CLOSE_PAREN beginstmt
+    (3) vars_ -> . VAR variables COLON types SEMI_COLON
+    (4) vars_ -> .
+
+    VARIABLE        shift and go to state 19
+    CALL            shift and go to state 20
+    PRINT_          shift and go to state 21
+    IF              shift and go to state 22
+    WHILE_          shift and go to state 23
+    BREAK           shift and go to state 24
+    CONTINUE        shift and go to state 25
+    FUNCTION        shift and go to state 26
+    VAR             shift and go to state 4
+    SEMI_COLON      reduce using rule 4 (vars_ -> .)
+
+    statement                      shift and go to state 10
+    assign                         shift and go to state 11
+    call                           shift and go to state 12
+    print_                         shift and go to state 13
+    if_                            shift and go to state 14
+    while_                         shift and go to state 15
+    break_cont                     shift and go to state 16
+    function                       shift and go to state 17
+    vars_                          shift and go to state 18
+
+state 7
+
+    (3) vars_ -> VAR variables . COLON types SEMI_COLON
+
+    COLON           shift and go to state 27
+
+
+state 8
+
+    (5) variables -> VARIABLE . COMMA VARIABLE
+    (6) variables -> VARIABLE .
+
+    COMMA           shift and go to state 28
+    COLON           reduce using rule 6 (variables -> VARIABLE .)
+    CLOSE_PAREN     reduce using rule 6 (variables -> VARIABLE .)
+
+
+state 9
+
+    (23) beginstmt -> beginstmt BEGIN . statement SEMI_COLON END
+    (9) statement -> . assign
+    (10) statement -> . call
+    (11) statement -> . print_
+    (12) statement -> . if_
+    (13) statement -> . while_
+    (14) statement -> . break_cont
+    (15) statement -> . function
+    (16) statement -> . vars_
+    (17) assign -> . VARIABLE EQUAL expression
+    (18) call -> . CALL NAME_FUNCTION OPEN_PAREN variables CLOSE_PAREN
+    (19) print_ -> . PRINT_ OPEN_PAREN args_print CLOSE_PAREN
+    (24) if_ -> . IF OPEN_PAREN condition CLOSE_PAREN beginstmt
+    (25) if_ -> . IF OPEN_PAREN condition CLOSE_PAREN beginstmt ELSE beginstmt
+    (26) while_ -> . WHILE_ OPEN_PAREN condition CLOSE_PAREN beginstmt
+    (27) break_cont -> . BREAK
+    (28) break_cont -> . CONTINUE
+    (21) function -> . FUNCTION NAME_FUNCTION OPEN_PAREN variables CLOSE_PAREN beginstmt
+    (3) vars_ -> . VAR variables COLON types SEMI_COLON
+    (4) vars_ -> .
+
+    VARIABLE        shift and go to state 19
+    CALL            shift and go to state 20
+    PRINT_          shift and go to state 21
+    IF              shift and go to state 22
+    WHILE_          shift and go to state 23
+    BREAK           shift and go to state 24
+    CONTINUE        shift and go to state 25
+    FUNCTION        shift and go to state 26
+    VAR             shift and go to state 4
+    SEMI_COLON      reduce using rule 4 (vars_ -> .)
+
+    statement                      shift and go to state 29
+    assign                         shift and go to state 11
+    call                           shift and go to state 12
+    print_                         shift and go to state 13
+    if_                            shift and go to state 14
+    while_                         shift and go to state 15
+    break_cont                     shift and go to state 16
+    function                       shift and go to state 17
+    vars_                          shift and go to state 18
+
+state 10
+
+    (22) beginstmt -> BEGIN statement . SEMI_COLON END
+
+    SEMI_COLON      shift and go to state 30
+
+
+state 11
+
+    (9) statement -> assign .
+
+    SEMI_COLON      reduce using rule 9 (statement -> assign .)
+
+
+state 12
+
+    (10) statement -> call .
+
+    SEMI_COLON      reduce using rule 10 (statement -> call .)
+
+
+state 13
+
+    (11) statement -> print_ .
+
+    SEMI_COLON      reduce using rule 11 (statement -> print_ .)
+
+
+state 14
+
+    (12) statement -> if_ .
+
+    SEMI_COLON      reduce using rule 12 (statement -> if_ .)
+
+
+state 15
+
+    (13) statement -> while_ .
+
+    SEMI_COLON      reduce using rule 13 (statement -> while_ .)
+
+
+state 16
+
+    (14) statement -> break_cont .
+
+    SEMI_COLON      reduce using rule 14 (statement -> break_cont .)
+
+
+state 17
+
+    (15) statement -> function .
+
+    SEMI_COLON      reduce using rule 15 (statement -> function .)
+
+
+state 18
+
+    (16) statement -> vars_ .
+
+    SEMI_COLON      reduce using rule 16 (statement -> vars_ .)
+
+
+state 19
+
+    (17) assign -> VARIABLE . EQUAL expression
+
+    EQUAL           shift and go to state 31
+
+
+state 20
+
+    (18) call -> CALL . NAME_FUNCTION OPEN_PAREN variables CLOSE_PAREN
+
+    NAME_FUNCTION   shift and go to state 32
+
+
+state 21
+
+    (19) print_ -> PRINT_ . OPEN_PAREN args_print CLOSE_PAREN
+
+    OPEN_PAREN      shift and go to state 33
+
+
+state 22
+
+    (24) if_ -> IF . OPEN_PAREN condition CLOSE_PAREN beginstmt
+    (25) if_ -> IF . OPEN_PAREN condition CLOSE_PAREN beginstmt ELSE beginstmt
+
+    OPEN_PAREN      shift and go to state 34
+
+
+state 23
+
+    (26) while_ -> WHILE_ . OPEN_PAREN condition CLOSE_PAREN beginstmt
+
+    OPEN_PAREN      shift and go to state 35
+
+
+state 24
+
+    (27) break_cont -> BREAK .
+
+    SEMI_COLON      reduce using rule 27 (break_cont -> BREAK .)
+
+
+state 25
+
+    (28) break_cont -> CONTINUE .
+
+    SEMI_COLON      reduce using rule 28 (break_cont -> CONTINUE .)
+
+
+state 26
+
+    (21) function -> FUNCTION . NAME_FUNCTION OPEN_PAREN variables CLOSE_PAREN beginstmt
+
+    NAME_FUNCTION   shift and go to state 36
+
+
+state 27
+
+    (3) vars_ -> VAR variables COLON . types SEMI_COLON
+    (7) types -> . INTEGER_TYPE
+    (8) types -> . FLOAT_TYPE
+
+    INTEGER_TYPE    shift and go to state 38
+    FLOAT_TYPE      shift and go to state 39
+
+    types                          shift and go to state 37
+
+state 28
+
+    (5) variables -> VARIABLE COMMA . VARIABLE
+
+    VARIABLE        shift and go to state 40
+
+
+state 29
+
+    (23) beginstmt -> beginstmt BEGIN statement . SEMI_COLON END
+
+    SEMI_COLON      shift and go to state 41
+
+
+state 30
+
+    (22) beginstmt -> BEGIN statement SEMI_COLON . END
+
+    END             shift and go to state 42
+
+
+state 31
+
+    (17) assign -> VARIABLE EQUAL . expression
+    (39) expression -> . term SUM term
+    (40) expression -> . term MINUS term
+    (41) expression -> .
+    (42) term -> . factor
+    (43) term -> . factor MULTIPLY factor
+    (44) term -> . factor DIVISION factor
+    (45) factor -> . VARIABLE
+    (46) factor -> . digit
+    (47) factor -> . OPEN_PAREN expression CLOSE_PAREN
+    (48) digit -> . INT_DIGIT
+    (49) digit -> . FLOAT_DIGIT
+
+    SEMI_COLON      reduce using rule 41 (expression -> .)
+    VARIABLE        shift and go to state 43
+    OPEN_PAREN      shift and go to state 48
+    INT_DIGIT       shift and go to state 49
+    FLOAT_DIGIT     shift and go to state 50
+
+    expression                     shift and go to state 44
+    term                           shift and go to state 45
+    factor                         shift and go to state 46
+    digit                          shift and go to state 47
+
+state 32
+
+    (18) call -> CALL NAME_FUNCTION . OPEN_PAREN variables CLOSE_PAREN
+
+    OPEN_PAREN      shift and go to state 51
+
+
+state 33
+
+    (19) print_ -> PRINT_ OPEN_PAREN . args_print CLOSE_PAREN
+    (20) args_print -> . variables
+    (5) variables -> . VARIABLE COMMA VARIABLE
+    (6) variables -> . VARIABLE
+
+    VARIABLE        shift and go to state 8
+
+    args_print                     shift and go to state 52
+    variables                      shift and go to state 53
+
+state 34
+
+    (24) if_ -> IF OPEN_PAREN . condition CLOSE_PAREN beginstmt
+    (25) if_ -> IF OPEN_PAREN . condition CLOSE_PAREN beginstmt ELSE beginstmt
+    (29) condition -> . expression compare_operators expression
+    (30) condition -> . OPEN_PAREN expression CLOSE_PAREN compare_operators OPEN_PAREN expression CLOSE_PAREN
+    (39) expression -> . term SUM term
+    (40) expression -> . term MINUS term
+    (41) expression -> .
+    (42) term -> . factor
+    (43) term -> . factor MULTIPLY factor
+    (44) term -> . factor DIVISION factor
+    (45) factor -> . VARIABLE
+    (46) factor -> . digit
+    (47) factor -> . OPEN_PAREN expression CLOSE_PAREN
+    (48) digit -> . INT_DIGIT
+    (49) digit -> . FLOAT_DIGIT
+
+    OPEN_PAREN      shift and go to state 54
+    NEGEQ           reduce using rule 41 (expression -> .)
+    LOGIC_EQUAL     reduce using rule 41 (expression -> .)
+    LESS            reduce using rule 41 (expression -> .)
+    MORE_           reduce using rule 41 (expression -> .)
+    LESS_EQUAL      reduce using rule 41 (expression -> .)
+    MORE_EQUAL      reduce using rule 41 (expression -> .)
+    VARIABLE        shift and go to state 43
+    INT_DIGIT       shift and go to state 49
+    FLOAT_DIGIT     shift and go to state 50
+
+    condition                      shift and go to state 55
+    expression                     shift and go to state 56
+    term                           shift and go to state 45
+    factor                         shift and go to state 46
+    digit                          shift and go to state 47
+
+state 35
+
+    (26) while_ -> WHILE_ OPEN_PAREN . condition CLOSE_PAREN beginstmt
+    (29) condition -> . expression compare_operators expression
+    (30) condition -> . OPEN_PAREN expression CLOSE_PAREN compare_operators OPEN_PAREN expression CLOSE_PAREN
+    (39) expression -> . term SUM term
+    (40) expression -> . term MINUS term
+    (41) expression -> .
+    (42) term -> . factor
+    (43) term -> . factor MULTIPLY factor
+    (44) term -> . factor DIVISION factor
+    (45) factor -> . VARIABLE
+    (46) factor -> . digit
+    (47) factor -> . OPEN_PAREN expression CLOSE_PAREN
+    (48) digit -> . INT_DIGIT
+    (49) digit -> . FLOAT_DIGIT
+
+    OPEN_PAREN      shift and go to state 54
+    NEGEQ           reduce using rule 41 (expression -> .)
+    LOGIC_EQUAL     reduce using rule 41 (expression -> .)
+    LESS            reduce using rule 41 (expression -> .)
+    MORE_           reduce using rule 41 (expression -> .)
+    LESS_EQUAL      reduce using rule 41 (expression -> .)
+    MORE_EQUAL      reduce using rule 41 (expression -> .)
+    VARIABLE        shift and go to state 43
+    INT_DIGIT       shift and go to state 49
+    FLOAT_DIGIT     shift and go to state 50
+
+    condition                      shift and go to state 57
+    expression                     shift and go to state 56
+    term                           shift and go to state 45
+    factor                         shift and go to state 46
+    digit                          shift and go to state 47
+
+state 36
+
+    (21) function -> FUNCTION NAME_FUNCTION . OPEN_PAREN variables CLOSE_PAREN beginstmt
+
+    OPEN_PAREN      shift and go to state 58
+
+
+state 37
+
+    (3) vars_ -> VAR variables COLON types . SEMI_COLON
+
+    SEMI_COLON      shift and go to state 59
+
+
+state 38
+
+    (7) types -> INTEGER_TYPE .
+
+    SEMI_COLON      reduce using rule 7 (types -> INTEGER_TYPE .)
+
+
+state 39
+
+    (8) types -> FLOAT_TYPE .
+
+    SEMI_COLON      reduce using rule 8 (types -> FLOAT_TYPE .)
+
+
+state 40
+
+    (5) variables -> VARIABLE COMMA VARIABLE .
+
+    COLON           reduce using rule 5 (variables -> VARIABLE COMMA VARIABLE .)
+    CLOSE_PAREN     reduce using rule 5 (variables -> VARIABLE COMMA VARIABLE .)
+
+
+state 41
+
+    (23) beginstmt -> beginstmt BEGIN statement SEMI_COLON . END
+
+    END             shift and go to state 60
+
+
+state 42
+
+    (22) beginstmt -> BEGIN statement SEMI_COLON END .
+
+    BEGIN           reduce using rule 22 (beginstmt -> BEGIN statement SEMI_COLON END .)
+    $end            reduce using rule 22 (beginstmt -> BEGIN statement SEMI_COLON END .)
+    ELSE            reduce using rule 22 (beginstmt -> BEGIN statement SEMI_COLON END .)
+    SEMI_COLON      reduce using rule 22 (beginstmt -> BEGIN statement SEMI_COLON END .)
+
+
+state 43
+
+    (45) factor -> VARIABLE .
+
+    MULTIPLY        reduce using rule 45 (factor -> VARIABLE .)
+    DIVISION        reduce using rule 45 (factor -> VARIABLE .)
+    SUM             reduce using rule 45 (factor -> VARIABLE .)
+    MINUS           reduce using rule 45 (factor -> VARIABLE .)
+    SEMI_COLON      reduce using rule 45 (factor -> VARIABLE .)
+    NEGEQ           reduce using rule 45 (factor -> VARIABLE .)
+    LOGIC_EQUAL     reduce using rule 45 (factor -> VARIABLE .)
+    LESS            reduce using rule 45 (factor -> VARIABLE .)
+    MORE_           reduce using rule 45 (factor -> VARIABLE .)
+    LESS_EQUAL      reduce using rule 45 (factor -> VARIABLE .)
+    MORE_EQUAL      reduce using rule 45 (factor -> VARIABLE .)
+    CLOSE_PAREN     reduce using rule 45 (factor -> VARIABLE .)
+
+
+state 44
+
+    (17) assign -> VARIABLE EQUAL expression .
+
+    SEMI_COLON      reduce using rule 17 (assign -> VARIABLE EQUAL expression .)
+
+
+state 45
+
+    (39) expression -> term . SUM term
+    (40) expression -> term . MINUS term
+
+    SUM             shift and go to state 61
+    MINUS           shift and go to state 62
+
+
+state 46
+
+    (42) term -> factor .
+    (43) term -> factor . MULTIPLY factor
+    (44) term -> factor . DIVISION factor
+
+    SUM             reduce using rule 42 (term -> factor .)
+    MINUS           reduce using rule 42 (term -> factor .)
+    SEMI_COLON      reduce using rule 42 (term -> factor .)
+    NEGEQ           reduce using rule 42 (term -> factor .)
+    LOGIC_EQUAL     reduce using rule 42 (term -> factor .)
+    LESS            reduce using rule 42 (term -> factor .)
+    MORE_           reduce using rule 42 (term -> factor .)
+    LESS_EQUAL      reduce using rule 42 (term -> factor .)
+    MORE_EQUAL      reduce using rule 42 (term -> factor .)
+    CLOSE_PAREN     reduce using rule 42 (term -> factor .)
+    MULTIPLY        shift and go to state 63
+    DIVISION        shift and go to state 64
+
+
+state 47
+
+    (46) factor -> digit .
+
+    MULTIPLY        reduce using rule 46 (factor -> digit .)
+    DIVISION        reduce using rule 46 (factor -> digit .)
+    SUM             reduce using rule 46 (factor -> digit .)
+    MINUS           reduce using rule 46 (factor -> digit .)
+    SEMI_COLON      reduce using rule 46 (factor -> digit .)
+    NEGEQ           reduce using rule 46 (factor -> digit .)
+    LOGIC_EQUAL     reduce using rule 46 (factor -> digit .)
+    LESS            reduce using rule 46 (factor -> digit .)
+    MORE_           reduce using rule 46 (factor -> digit .)
+    LESS_EQUAL      reduce using rule 46 (factor -> digit .)
+    MORE_EQUAL      reduce using rule 46 (factor -> digit .)
+    CLOSE_PAREN     reduce using rule 46 (factor -> digit .)
+
+
+state 48
+
+    (47) factor -> OPEN_PAREN . expression CLOSE_PAREN
+    (39) expression -> . term SUM term
+    (40) expression -> . term MINUS term
+    (41) expression -> .
+    (42) term -> . factor
+    (43) term -> . factor MULTIPLY factor
+    (44) term -> . factor DIVISION factor
+    (45) factor -> . VARIABLE
+    (46) factor -> . digit
+    (47) factor -> . OPEN_PAREN expression CLOSE_PAREN
+    (48) digit -> . INT_DIGIT
+    (49) digit -> . FLOAT_DIGIT
+
+    CLOSE_PAREN     reduce using rule 41 (expression -> .)
+    VARIABLE        shift and go to state 43
+    OPEN_PAREN      shift and go to state 48
+    INT_DIGIT       shift and go to state 49
+    FLOAT_DIGIT     shift and go to state 50
+
+    expression                     shift and go to state 65
+    term                           shift and go to state 45
+    factor                         shift and go to state 46
+    digit                          shift and go to state 47
+
+state 49
+
+    (48) digit -> INT_DIGIT .
+
+    MULTIPLY        reduce using rule 48 (digit -> INT_DIGIT .)
+    DIVISION        reduce using rule 48 (digit -> INT_DIGIT .)
+    SUM             reduce using rule 48 (digit -> INT_DIGIT .)
+    MINUS           reduce using rule 48 (digit -> INT_DIGIT .)
+    SEMI_COLON      reduce using rule 48 (digit -> INT_DIGIT .)
+    NEGEQ           reduce using rule 48 (digit -> INT_DIGIT .)
+    LOGIC_EQUAL     reduce using rule 48 (digit -> INT_DIGIT .)
+    LESS            reduce using rule 48 (digit -> INT_DIGIT .)
+    MORE_           reduce using rule 48 (digit -> INT_DIGIT .)
+    LESS_EQUAL      reduce using rule 48 (digit -> INT_DIGIT .)
+    MORE_EQUAL      reduce using rule 48 (digit -> INT_DIGIT .)
+    CLOSE_PAREN     reduce using rule 48 (digit -> INT_DIGIT .)
+
+
+state 50
+
+    (49) digit -> FLOAT_DIGIT .
+
+    MULTIPLY        reduce using rule 49 (digit -> FLOAT_DIGIT .)
+    DIVISION        reduce using rule 49 (digit -> FLOAT_DIGIT .)
+    SUM             reduce using rule 49 (digit -> FLOAT_DIGIT .)
+    MINUS           reduce using rule 49 (digit -> FLOAT_DIGIT .)
+    SEMI_COLON      reduce using rule 49 (digit -> FLOAT_DIGIT .)
+    NEGEQ           reduce using rule 49 (digit -> FLOAT_DIGIT .)
+    LOGIC_EQUAL     reduce using rule 49 (digit -> FLOAT_DIGIT .)
+    LESS            reduce using rule 49 (digit -> FLOAT_DIGIT .)
+    MORE_           reduce using rule 49 (digit -> FLOAT_DIGIT .)
+    LESS_EQUAL      reduce using rule 49 (digit -> FLOAT_DIGIT .)
+    MORE_EQUAL      reduce using rule 49 (digit -> FLOAT_DIGIT .)
+    CLOSE_PAREN     reduce using rule 49 (digit -> FLOAT_DIGIT .)
+
+
+state 51
+
+    (18) call -> CALL NAME_FUNCTION OPEN_PAREN . variables CLOSE_PAREN
+    (5) variables -> . VARIABLE COMMA VARIABLE
+    (6) variables -> . VARIABLE
+
+    VARIABLE        shift and go to state 8
+
+    variables                      shift and go to state 66
+
+state 52
+
+    (19) print_ -> PRINT_ OPEN_PAREN args_print . CLOSE_PAREN
+
+    CLOSE_PAREN     shift and go to state 67
+
+
+state 53
+
+    (20) args_print -> variables .
+
+    CLOSE_PAREN     reduce using rule 20 (args_print -> variables .)
+
+
+state 54
+
+    (30) condition -> OPEN_PAREN . expression CLOSE_PAREN compare_operators OPEN_PAREN expression CLOSE_PAREN
+    (47) factor -> OPEN_PAREN . expression CLOSE_PAREN
+    (39) expression -> . term SUM term
+    (40) expression -> . term MINUS term
+    (41) expression -> .
+    (42) term -> . factor
+    (43) term -> . factor MULTIPLY factor
+    (44) term -> . factor DIVISION factor
+    (45) factor -> . VARIABLE
+    (46) factor -> . digit
+    (47) factor -> . OPEN_PAREN expression CLOSE_PAREN
+    (48) digit -> . INT_DIGIT
+    (49) digit -> . FLOAT_DIGIT
+
+    CLOSE_PAREN     reduce using rule 41 (expression -> .)
+    VARIABLE        shift and go to state 43
+    OPEN_PAREN      shift and go to state 48
+    INT_DIGIT       shift and go to state 49
+    FLOAT_DIGIT     shift and go to state 50
+
+    expression                     shift and go to state 68
+    term                           shift and go to state 45
+    factor                         shift and go to state 46
+    digit                          shift and go to state 47
+
+state 55
+
+    (24) if_ -> IF OPEN_PAREN condition . CLOSE_PAREN beginstmt
+    (25) if_ -> IF OPEN_PAREN condition . CLOSE_PAREN beginstmt ELSE beginstmt
+
+    CLOSE_PAREN     shift and go to state 69
+
+
+state 56
+
+    (29) condition -> expression . compare_operators expression
+    (33) compare_operators -> . NEGEQ
+    (34) compare_operators -> . LOGIC_EQUAL
+    (35) compare_operators -> . LESS
+    (36) compare_operators -> . MORE_
+    (37) compare_operators -> . LESS_EQUAL
+    (38) compare_operators -> . MORE_EQUAL
+
+    NEGEQ           shift and go to state 71
+    LOGIC_EQUAL     shift and go to state 72
+    LESS            shift and go to state 73
+    MORE_           shift and go to state 74
+    LESS_EQUAL      shift and go to state 75
+    MORE_EQUAL      shift and go to state 76
+
+    compare_operators              shift and go to state 70
+
+state 57
+
+    (26) while_ -> WHILE_ OPEN_PAREN condition . CLOSE_PAREN beginstmt
+
+    CLOSE_PAREN     shift and go to state 77
+
+
+state 58
+
+    (21) function -> FUNCTION NAME_FUNCTION OPEN_PAREN . variables CLOSE_PAREN beginstmt
+    (5) variables -> . VARIABLE COMMA VARIABLE
+    (6) variables -> . VARIABLE
+
+    VARIABLE        shift and go to state 8
+
+    variables                      shift and go to state 78
+
+state 59
+
+    (3) vars_ -> VAR variables COLON types SEMI_COLON .
+
+    BEGIN           reduce using rule 3 (vars_ -> VAR variables COLON types SEMI_COLON .)
+    SEMI_COLON      reduce using rule 3 (vars_ -> VAR variables COLON types SEMI_COLON .)
+
+
+state 60
+
+    (23) beginstmt -> beginstmt BEGIN statement SEMI_COLON END .
+
+    BEGIN           reduce using rule 23 (beginstmt -> beginstmt BEGIN statement SEMI_COLON END .)
+    $end            reduce using rule 23 (beginstmt -> beginstmt BEGIN statement SEMI_COLON END .)
+    ELSE            reduce using rule 23 (beginstmt -> beginstmt BEGIN statement SEMI_COLON END .)
+    SEMI_COLON      reduce using rule 23 (beginstmt -> beginstmt BEGIN statement SEMI_COLON END .)
+
+
+state 61
+
+    (39) expression -> term SUM . term
+    (42) term -> . factor
+    (43) term -> . factor MULTIPLY factor
+    (44) term -> . factor DIVISION factor
+    (45) factor -> . VARIABLE
+    (46) factor -> . digit
+    (47) factor -> . OPEN_PAREN expression CLOSE_PAREN
+    (48) digit -> . INT_DIGIT
+    (49) digit -> . FLOAT_DIGIT
+
+    VARIABLE        shift and go to state 43
+    OPEN_PAREN      shift and go to state 48
+    INT_DIGIT       shift and go to state 49
+    FLOAT_DIGIT     shift and go to state 50
+
+    term                           shift and go to state 79
+    factor                         shift and go to state 46
+    digit                          shift and go to state 47
+
+state 62
+
+    (40) expression -> term MINUS . term
+    (42) term -> . factor
+    (43) term -> . factor MULTIPLY factor
+    (44) term -> . factor DIVISION factor
+    (45) factor -> . VARIABLE
+    (46) factor -> . digit
+    (47) factor -> . OPEN_PAREN expression CLOSE_PAREN
+    (48) digit -> . INT_DIGIT
+    (49) digit -> . FLOAT_DIGIT
+
+    VARIABLE        shift and go to state 43
+    OPEN_PAREN      shift and go to state 48
+    INT_DIGIT       shift and go to state 49
+    FLOAT_DIGIT     shift and go to state 50
+
+    term                           shift and go to state 80
+    factor                         shift and go to state 46
+    digit                          shift and go to state 47
+
+state 63
+
+    (43) term -> factor MULTIPLY . factor
+    (45) factor -> . VARIABLE
+    (46) factor -> . digit
+    (47) factor -> . OPEN_PAREN expression CLOSE_PAREN
+    (48) digit -> . INT_DIGIT
+    (49) digit -> . FLOAT_DIGIT
+
+    VARIABLE        shift and go to state 43
+    OPEN_PAREN      shift and go to state 48
+    INT_DIGIT       shift and go to state 49
+    FLOAT_DIGIT     shift and go to state 50
+
+    factor                         shift and go to state 81
+    digit                          shift and go to state 47
+
+state 64
+
+    (44) term -> factor DIVISION . factor
+    (45) factor -> . VARIABLE
+    (46) factor -> . digit
+    (47) factor -> . OPEN_PAREN expression CLOSE_PAREN
+    (48) digit -> . INT_DIGIT
+    (49) digit -> . FLOAT_DIGIT
+
+    VARIABLE        shift and go to state 43
+    OPEN_PAREN      shift and go to state 48
+    INT_DIGIT       shift and go to state 49
+    FLOAT_DIGIT     shift and go to state 50
+
+    factor                         shift and go to state 82
+    digit                          shift and go to state 47
+
+state 65
+
+    (47) factor -> OPEN_PAREN expression . CLOSE_PAREN
+
+    CLOSE_PAREN     shift and go to state 83
+
+
+state 66
+
+    (18) call -> CALL NAME_FUNCTION OPEN_PAREN variables . CLOSE_PAREN
+
+    CLOSE_PAREN     shift and go to state 84
+
+
+state 67
+
+    (19) print_ -> PRINT_ OPEN_PAREN args_print CLOSE_PAREN .
+
+    SEMI_COLON      reduce using rule 19 (print_ -> PRINT_ OPEN_PAREN args_print CLOSE_PAREN .)
+
+
+state 68
+
+    (30) condition -> OPEN_PAREN expression . CLOSE_PAREN compare_operators OPEN_PAREN expression CLOSE_PAREN
+    (47) factor -> OPEN_PAREN expression . CLOSE_PAREN
+
+    CLOSE_PAREN     shift and go to state 85
+
+
+state 69
+
+    (24) if_ -> IF OPEN_PAREN condition CLOSE_PAREN . beginstmt
+    (25) if_ -> IF OPEN_PAREN condition CLOSE_PAREN . beginstmt ELSE beginstmt
+    (22) beginstmt -> . BEGIN statement SEMI_COLON END
+    (23) beginstmt -> . beginstmt BEGIN statement SEMI_COLON END
+
+    BEGIN           shift and go to state 6
+
+    beginstmt                      shift and go to state 86
+
+state 70
+
+    (29) condition -> expression compare_operators . expression
+    (39) expression -> . term SUM term
+    (40) expression -> . term MINUS term
+    (41) expression -> .
+    (42) term -> . factor
+    (43) term -> . factor MULTIPLY factor
+    (44) term -> . factor DIVISION factor
+    (45) factor -> . VARIABLE
+    (46) factor -> . digit
+    (47) factor -> . OPEN_PAREN expression CLOSE_PAREN
+    (48) digit -> . INT_DIGIT
+    (49) digit -> . FLOAT_DIGIT
+
+    CLOSE_PAREN     reduce using rule 41 (expression -> .)
+    VARIABLE        shift and go to state 43
+    OPEN_PAREN      shift and go to state 48
+    INT_DIGIT       shift and go to state 49
+    FLOAT_DIGIT     shift and go to state 50
+
+    expression                     shift and go to state 87
+    term                           shift and go to state 45
+    factor                         shift and go to state 46
+    digit                          shift and go to state 47
+
+state 71
+
+    (33) compare_operators -> NEGEQ .
+
+    VARIABLE        reduce using rule 33 (compare_operators -> NEGEQ .)
+    OPEN_PAREN      reduce using rule 33 (compare_operators -> NEGEQ .)
+    INT_DIGIT       reduce using rule 33 (compare_operators -> NEGEQ .)
+    FLOAT_DIGIT     reduce using rule 33 (compare_operators -> NEGEQ .)
+    CLOSE_PAREN     reduce using rule 33 (compare_operators -> NEGEQ .)
+
+
+state 72
+
+    (34) compare_operators -> LOGIC_EQUAL .
+
+    VARIABLE        reduce using rule 34 (compare_operators -> LOGIC_EQUAL .)
+    OPEN_PAREN      reduce using rule 34 (compare_operators -> LOGIC_EQUAL .)
+    INT_DIGIT       reduce using rule 34 (compare_operators -> LOGIC_EQUAL .)
+    FLOAT_DIGIT     reduce using rule 34 (compare_operators -> LOGIC_EQUAL .)
+    CLOSE_PAREN     reduce using rule 34 (compare_operators -> LOGIC_EQUAL .)
+
+
+state 73
+
+    (35) compare_operators -> LESS .
+
+    VARIABLE        reduce using rule 35 (compare_operators -> LESS .)
+    OPEN_PAREN      reduce using rule 35 (compare_operators -> LESS .)
+    INT_DIGIT       reduce using rule 35 (compare_operators -> LESS .)
+    FLOAT_DIGIT     reduce using rule 35 (compare_operators -> LESS .)
+    CLOSE_PAREN     reduce using rule 35 (compare_operators -> LESS .)
+
+
+state 74
+
+    (36) compare_operators -> MORE_ .
+
+    VARIABLE        reduce using rule 36 (compare_operators -> MORE_ .)
+    OPEN_PAREN      reduce using rule 36 (compare_operators -> MORE_ .)
+    INT_DIGIT       reduce using rule 36 (compare_operators -> MORE_ .)
+    FLOAT_DIGIT     reduce using rule 36 (compare_operators -> MORE_ .)
+    CLOSE_PAREN     reduce using rule 36 (compare_operators -> MORE_ .)
+
+
+state 75
+
+    (37) compare_operators -> LESS_EQUAL .
+
+    VARIABLE        reduce using rule 37 (compare_operators -> LESS_EQUAL .)
+    OPEN_PAREN      reduce using rule 37 (compare_operators -> LESS_EQUAL .)
+    INT_DIGIT       reduce using rule 37 (compare_operators -> LESS_EQUAL .)
+    FLOAT_DIGIT     reduce using rule 37 (compare_operators -> LESS_EQUAL .)
+    CLOSE_PAREN     reduce using rule 37 (compare_operators -> LESS_EQUAL .)
+
+
+state 76
+
+    (38) compare_operators -> MORE_EQUAL .
+
+    VARIABLE        reduce using rule 38 (compare_operators -> MORE_EQUAL .)
+    OPEN_PAREN      reduce using rule 38 (compare_operators -> MORE_EQUAL .)
+    INT_DIGIT       reduce using rule 38 (compare_operators -> MORE_EQUAL .)
+    FLOAT_DIGIT     reduce using rule 38 (compare_operators -> MORE_EQUAL .)
+    CLOSE_PAREN     reduce using rule 38 (compare_operators -> MORE_EQUAL .)
+
+
+state 77
+
+    (26) while_ -> WHILE_ OPEN_PAREN condition CLOSE_PAREN . beginstmt
+    (22) beginstmt -> . BEGIN statement SEMI_COLON END
+    (23) beginstmt -> . beginstmt BEGIN statement SEMI_COLON END
+
+    BEGIN           shift and go to state 6
+
+    beginstmt                      shift and go to state 88
+
+state 78
+
+    (21) function -> FUNCTION NAME_FUNCTION OPEN_PAREN variables . CLOSE_PAREN beginstmt
+
+    CLOSE_PAREN     shift and go to state 89
+
+
+state 79
+
+    (39) expression -> term SUM term .
+
+    SEMI_COLON      reduce using rule 39 (expression -> term SUM term .)
+    NEGEQ           reduce using rule 39 (expression -> term SUM term .)
+    LOGIC_EQUAL     reduce using rule 39 (expression -> term SUM term .)
+    LESS            reduce using rule 39 (expression -> term SUM term .)
+    MORE_           reduce using rule 39 (expression -> term SUM term .)
+    LESS_EQUAL      reduce using rule 39 (expression -> term SUM term .)
+    MORE_EQUAL      reduce using rule 39 (expression -> term SUM term .)
+    CLOSE_PAREN     reduce using rule 39 (expression -> term SUM term .)
+
+
+state 80
+
+    (40) expression -> term MINUS term .
+
+    SEMI_COLON      reduce using rule 40 (expression -> term MINUS term .)
+    NEGEQ           reduce using rule 40 (expression -> term MINUS term .)
+    LOGIC_EQUAL     reduce using rule 40 (expression -> term MINUS term .)
+    LESS            reduce using rule 40 (expression -> term MINUS term .)
+    MORE_           reduce using rule 40 (expression -> term MINUS term .)
+    LESS_EQUAL      reduce using rule 40 (expression -> term MINUS term .)
+    MORE_EQUAL      reduce using rule 40 (expression -> term MINUS term .)
+    CLOSE_PAREN     reduce using rule 40 (expression -> term MINUS term .)
+
+
+state 81
+
+    (43) term -> factor MULTIPLY factor .
+
+    SUM             reduce using rule 43 (term -> factor MULTIPLY factor .)
+    MINUS           reduce using rule 43 (term -> factor MULTIPLY factor .)
+    SEMI_COLON      reduce using rule 43 (term -> factor MULTIPLY factor .)
+    NEGEQ           reduce using rule 43 (term -> factor MULTIPLY factor .)
+    LOGIC_EQUAL     reduce using rule 43 (term -> factor MULTIPLY factor .)
+    LESS            reduce using rule 43 (term -> factor MULTIPLY factor .)
+    MORE_           reduce using rule 43 (term -> factor MULTIPLY factor .)
+    LESS_EQUAL      reduce using rule 43 (term -> factor MULTIPLY factor .)
+    MORE_EQUAL      reduce using rule 43 (term -> factor MULTIPLY factor .)
+    CLOSE_PAREN     reduce using rule 43 (term -> factor MULTIPLY factor .)
+
+
+state 82
+
+    (44) term -> factor DIVISION factor .
+
+    SUM             reduce using rule 44 (term -> factor DIVISION factor .)
+    MINUS           reduce using rule 44 (term -> factor DIVISION factor .)
+    SEMI_COLON      reduce using rule 44 (term -> factor DIVISION factor .)
+    NEGEQ           reduce using rule 44 (term -> factor DIVISION factor .)
+    LOGIC_EQUAL     reduce using rule 44 (term -> factor DIVISION factor .)
+    LESS            reduce using rule 44 (term -> factor DIVISION factor .)
+    MORE_           reduce using rule 44 (term -> factor DIVISION factor .)
+    LESS_EQUAL      reduce using rule 44 (term -> factor DIVISION factor .)
+    MORE_EQUAL      reduce using rule 44 (term -> factor DIVISION factor .)
+    CLOSE_PAREN     reduce using rule 44 (term -> factor DIVISION factor .)
+
+
+state 83
+
+    (47) factor -> OPEN_PAREN expression CLOSE_PAREN .
+
+    MULTIPLY        reduce using rule 47 (factor -> OPEN_PAREN expression CLOSE_PAREN .)
+    DIVISION        reduce using rule 47 (factor -> OPEN_PAREN expression CLOSE_PAREN .)
+    SUM             reduce using rule 47 (factor -> OPEN_PAREN expression CLOSE_PAREN .)
+    MINUS           reduce using rule 47 (factor -> OPEN_PAREN expression CLOSE_PAREN .)
+    SEMI_COLON      reduce using rule 47 (factor -> OPEN_PAREN expression CLOSE_PAREN .)
+    NEGEQ           reduce using rule 47 (factor -> OPEN_PAREN expression CLOSE_PAREN .)
+    LOGIC_EQUAL     reduce using rule 47 (factor -> OPEN_PAREN expression CLOSE_PAREN .)
+    LESS            reduce using rule 47 (factor -> OPEN_PAREN expression CLOSE_PAREN .)
+    MORE_           reduce using rule 47 (factor -> OPEN_PAREN expression CLOSE_PAREN .)
+    LESS_EQUAL      reduce using rule 47 (factor -> OPEN_PAREN expression CLOSE_PAREN .)
+    MORE_EQUAL      reduce using rule 47 (factor -> OPEN_PAREN expression CLOSE_PAREN .)
+    CLOSE_PAREN     reduce using rule 47 (factor -> OPEN_PAREN expression CLOSE_PAREN .)
+
+
+state 84
+
+    (18) call -> CALL NAME_FUNCTION OPEN_PAREN variables CLOSE_PAREN .
+
+    SEMI_COLON      reduce using rule 18 (call -> CALL NAME_FUNCTION OPEN_PAREN variables CLOSE_PAREN .)
+
+
+state 85
+
+    (30) condition -> OPEN_PAREN expression CLOSE_PAREN . compare_operators OPEN_PAREN expression CLOSE_PAREN
+    (47) factor -> OPEN_PAREN expression CLOSE_PAREN .
+    (33) compare_operators -> . NEGEQ
+    (34) compare_operators -> . LOGIC_EQUAL
+    (35) compare_operators -> . LESS
+    (36) compare_operators -> . MORE_
+    (37) compare_operators -> . LESS_EQUAL
+    (38) compare_operators -> . MORE_EQUAL
+
+    MULTIPLY        reduce using rule 47 (factor -> OPEN_PAREN expression CLOSE_PAREN .)
+    DIVISION        reduce using rule 47 (factor -> OPEN_PAREN expression CLOSE_PAREN .)
+    SUM             reduce using rule 47 (factor -> OPEN_PAREN expression CLOSE_PAREN .)
+    MINUS           reduce using rule 47 (factor -> OPEN_PAREN expression CLOSE_PAREN .)
+    NEGEQ           shift and go to state 71
+    LOGIC_EQUAL     shift and go to state 72
+    LESS            shift and go to state 73
+    MORE_           shift and go to state 74
+    LESS_EQUAL      shift and go to state 75
+    MORE_EQUAL      shift and go to state 76
+
+    compare_operators              shift and go to state 90
+
+state 86
+
+    (24) if_ -> IF OPEN_PAREN condition CLOSE_PAREN beginstmt .
+    (25) if_ -> IF OPEN_PAREN condition CLOSE_PAREN beginstmt . ELSE beginstmt
+    (23) beginstmt -> beginstmt . BEGIN statement SEMI_COLON END
+
+    SEMI_COLON      reduce using rule 24 (if_ -> IF OPEN_PAREN condition CLOSE_PAREN beginstmt .)
+    ELSE            shift and go to state 91
+    BEGIN           shift and go to state 9
+
+
+state 87
+
+    (29) condition -> expression compare_operators expression .
+
+    CLOSE_PAREN     reduce using rule 29 (condition -> expression compare_operators expression .)
+
+
+state 88
+
+    (26) while_ -> WHILE_ OPEN_PAREN condition CLOSE_PAREN beginstmt .
+    (23) beginstmt -> beginstmt . BEGIN statement SEMI_COLON END
+
+    SEMI_COLON      reduce using rule 26 (while_ -> WHILE_ OPEN_PAREN condition CLOSE_PAREN beginstmt .)
+    BEGIN           shift and go to state 9
+
+
+state 89
+
+    (21) function -> FUNCTION NAME_FUNCTION OPEN_PAREN variables CLOSE_PAREN . beginstmt
+    (22) beginstmt -> . BEGIN statement SEMI_COLON END
+    (23) beginstmt -> . beginstmt BEGIN statement SEMI_COLON END
+
+    BEGIN           shift and go to state 6
+
+    beginstmt                      shift and go to state 92
+
+state 90
+
+    (30) condition -> OPEN_PAREN expression CLOSE_PAREN compare_operators . OPEN_PAREN expression CLOSE_PAREN
+
+    OPEN_PAREN      shift and go to state 93
+
+
+state 91
+
+    (25) if_ -> IF OPEN_PAREN condition CLOSE_PAREN beginstmt ELSE . beginstmt
+    (22) beginstmt -> . BEGIN statement SEMI_COLON END
+    (23) beginstmt -> . beginstmt BEGIN statement SEMI_COLON END
+
+    BEGIN           shift and go to state 6
+
+    beginstmt                      shift and go to state 94
+
+state 92
+
+    (21) function -> FUNCTION NAME_FUNCTION OPEN_PAREN variables CLOSE_PAREN beginstmt .
+    (23) beginstmt -> beginstmt . BEGIN statement SEMI_COLON END
+
+    SEMI_COLON      reduce using rule 21 (function -> FUNCTION NAME_FUNCTION OPEN_PAREN variables CLOSE_PAREN beginstmt .)
+    BEGIN           shift and go to state 9
+
+
+state 93
+
+    (30) condition -> OPEN_PAREN expression CLOSE_PAREN compare_operators OPEN_PAREN . expression CLOSE_PAREN
+    (39) expression -> . term SUM term
+    (40) expression -> . term MINUS term
+    (41) expression -> .
+    (42) term -> . factor
+    (43) term -> . factor MULTIPLY factor
+    (44) term -> . factor DIVISION factor
+    (45) factor -> . VARIABLE
+    (46) factor -> . digit
+    (47) factor -> . OPEN_PAREN expression CLOSE_PAREN
+    (48) digit -> . INT_DIGIT
+    (49) digit -> . FLOAT_DIGIT
+
+    CLOSE_PAREN     reduce using rule 41 (expression -> .)
+    VARIABLE        shift and go to state 43
+    OPEN_PAREN      shift and go to state 48
+    INT_DIGIT       shift and go to state 49
+    FLOAT_DIGIT     shift and go to state 50
+
+    expression                     shift and go to state 95
+    term                           shift and go to state 45
+    factor                         shift and go to state 46
+    digit                          shift and go to state 47
+
+state 94
+
+    (25) if_ -> IF OPEN_PAREN condition CLOSE_PAREN beginstmt ELSE beginstmt .
+    (23) beginstmt -> beginstmt . BEGIN statement SEMI_COLON END
+
+    SEMI_COLON      reduce using rule 25 (if_ -> IF OPEN_PAREN condition CLOSE_PAREN beginstmt ELSE beginstmt .)
+    BEGIN           shift and go to state 9
+
+
+state 95
+
+    (30) condition -> OPEN_PAREN expression CLOSE_PAREN compare_operators OPEN_PAREN expression . CLOSE_PAREN
+
+    CLOSE_PAREN     shift and go to state 96
+
+
+state 96
+
+    (30) condition -> OPEN_PAREN expression CLOSE_PAREN compare_operators OPEN_PAREN expression CLOSE_PAREN .
+
+    CLOSE_PAREN     reduce using rule 30 (condition -> OPEN_PAREN expression CLOSE_PAREN compare_operators OPEN_PAREN expression CLOSE_PAREN .)
+

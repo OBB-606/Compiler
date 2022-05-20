@@ -1,13 +1,17 @@
 var
-    $n, $i, $s : integer;
+    $n : integer;
 begin
-  $i = 1
-  $n = 5;
-  $s = 1;
-    while ($i <= $n)
+function #factorial($n)
     begin
-        $s = $s * $i;
-        $i = $i + 1;
+        var $i, $s : integer;
+        $i = 1;
+        $s = 1;
+        while ($i <= $n)
+        begin
+            $s = $s * $i;
+            $i = $i + 1;
+        end
+      print($s);
     end
-  print($s);
+call #factorial(5);
 end

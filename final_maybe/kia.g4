@@ -22,7 +22,7 @@ function
     ;
 
 statement
-    : (assign | call | print_ | beginstmt | if_ | while_ | break_cont | function)*
+    : (assign | vars_ | call | print_ | beginstmt | if_ | while_ | break_cont | function)*
     ;
 
 assign
@@ -30,7 +30,7 @@ assign
     ;
 
 call
-    : CALL NAME_FUNCTION OPEN_PAREN variable (COMMA variable)* CLOSE_PAREN
+    : CALL NAME_FUNCTION OPEN_PAREN factor (COMMA factor)* CLOSE_PAREN
     ;
 
 print_
